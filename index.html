@@ -32,6 +32,28 @@
         
         .container { max-width: 400px; margin: 0 auto; padding: 6px 10px 70px; }
         
+        /* Aviso */
+        .aviso {
+            background: #FFFBEB;
+            border-left: 3px solid #F59E0B;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 10px;
+            margin-bottom: 6px;
+        }
+        
+        .aviso-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #B45309;
+            margin-bottom: 2px;
+        }
+        
+        .aviso-text {
+            font-size: 0.55rem;
+            color: #92400E;
+            line-height: 1.4;
+        }
+        
         .card {
             background: var(--card);
             border-radius: 10px;
@@ -50,16 +72,13 @@
         
         .card-body { padding: 4px 10px 8px; }
         
-        /* Metric block com foto */
         .metric-block {
             display: flex;
             gap: 8px;
             margin-bottom: 6px;
         }
-        
         .metric-block:last-child { margin-bottom: 0; }
         
-        /* Foto container */
         .photo-area {
             width: 80px;
             flex-shrink: 0;
@@ -67,10 +86,7 @@
             flex-direction: column;
             gap: 4px;
         }
-        
-        .photo-area.collapsed {
-            width: 24px;
-        }
+        .photo-area.collapsed { width: 24px; }
         
         .photo-thumb {
             width: 80px;
@@ -80,13 +96,7 @@
             background: var(--bg);
             position: relative;
         }
-        
-        .photo-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
+        .photo-thumb img { width: 100%; height: 100%; object-fit: cover; }
         .photo-thumb .del {
             position: absolute;
             top: 2px;
@@ -101,10 +111,7 @@
             cursor: pointer;
         }
         
-        .photo-note {
-            width: 80px;
-        }
-        
+        .photo-note { width: 80px; }
         .photo-note input {
             width: 100%;
             height: 22px;
@@ -116,7 +123,6 @@
             color: var(--text2);
         }
         
-        /* Botão + circular */
         .add-photo-btn {
             width: 24px;
             height: 24px;
@@ -128,26 +134,11 @@
             cursor: pointer;
             flex-shrink: 0;
         }
-        
         .add-photo-btn:hover { background: var(--green-light); color: var(--green); }
         
-        /* Fields */
-        .fields-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        
-        .field-row {
-            display: flex;
-            gap: 6px;
-        }
-        
-        .field {
-            flex: 1;
-            min-width: 0;
-        }
+        .fields-area { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .field-row { display: flex; gap: 6px; }
+        .field { flex: 1; min-width: 0; }
         
         label {
             display: block;
@@ -168,7 +159,6 @@
             font-family: var(--font);
             color: var(--text);
         }
-        
         input:focus { outline: 2px solid var(--green); outline-offset: -2px; }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; }
         input[type=number] { -moz-appearance: textfield; }
@@ -197,7 +187,6 @@
             text-align: right;
         }
         
-        /* Resultado */
         .result {
             background: linear-gradient(180deg, var(--green-dark), #14332B);
             border-radius: 10px;
@@ -232,12 +221,7 @@
             text-transform: uppercase;
         }
         
-        .result-item .val {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #FFF;
-        }
-        
+        .result-item .val { font-size: 0.8rem; font-weight: 700; color: #FFF; }
         .result-main .val { font-size: 1.2rem; }
         .result-item .un { font-size: 0.4rem; color: rgba(255,255,255,0.5); }
         
@@ -257,12 +241,10 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             font-size: 0.45rem;
         }
-        
         .details.show { display: block; }
         .details div { display: flex; justify-content: space-between; padding: 1px 0; color: rgba(255,255,255,0.5); }
         .details span:last-child { color: rgba(255,255,255,0.8); }
         
-        /* Footer */
         .footer {
             display: flex;
             align-items: center;
@@ -286,28 +268,21 @@
             font-size: 0.4rem;
             color: var(--text3);
         }
-        
         .footer-logo img { width: 100%; height: 100%; object-fit: contain; }
         .footer-info { flex: 1; }
         .footer-info input { height: 22px; font-size: 0.65rem; margin-bottom: 2px; }
         .footer-info input:last-child { margin-bottom: 0; }
         
-        /* Branding */
         .branding {
             text-align: center;
             padding: 8px;
             font-size: 0.55rem;
         }
+        .branding a { text-decoration: none; color: var(--text2); }
+        .branding a:hover { color: var(--text); }
+        .brand-solo { color: var(--text); font-weight: 600; }
+        .brand-forte { color: var(--green); font-weight: 600; }
         
-        .branding a {
-            text-decoration: none;
-            color: var(--text2);
-        }
-        
-        .brand-name span:first-child { color: var(--text); font-weight: 600; }
-        .brand-name span:last-child { color: var(--green); font-weight: 600; }
-        
-        /* FABs */
         .fabs {
             position: fixed;
             bottom: 12px;
@@ -327,27 +302,14 @@
             cursor: pointer;
             box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
-        
         .fab-w { background: #FFF; }
         .fab-w svg { width: 16px; height: 16px; fill: var(--text2); }
         .fab-g { background: var(--green); }
         .fab-g svg { width: 16px; height: 16px; fill: #FFF; }
         
-        /* Print / PDF */
         @media print {
             .fabs, .add-photo-btn, .photo-thumb .del { display: none !important; }
             .details { display: block !important; }
-            body { background: #FFF; }
-            .container { padding-bottom: 0; }
-        }
-        
-        .pdf-mode .container {
-            max-width: 100%;
-            padding: 0;
-        }
-        
-        .pdf-mode .card {
-            break-inside: avoid;
         }
     </style>
 </head>
@@ -357,7 +319,12 @@
     </header>
     
     <main class="container" id="content">
-        <!-- Identificação -->
+        <!-- Aviso -->
+        <div class="aviso">
+            <div class="aviso-title">📌 Expectativa de Produção (Estimativa Técnica)</div>
+            <div class="aviso-text">📢 Os números apresentados abaixo são projeções técnicas e não garantem resultados absolutos, estando sujeitos a variações devido a fatores climáticos, de manejo e outros aspectos de campo.</div>
+        </div>
+        
         <section class="card">
             <div class="card-head">Identificação</div>
             <div class="card-body">
@@ -376,7 +343,6 @@
             </div>
         </section>
         
-        <!-- População -->
         <section class="card">
             <div class="card-head">População</div>
             <div class="card-body">
@@ -397,11 +363,9 @@
             </div>
         </section>
         
-        <!-- Componentes -->
         <section class="card">
             <div class="card-head">Componentes de Rendimento</div>
             <div class="card-body">
-                <!-- Plantas/Vagens/Grãos -->
                 <div class="metric-block" id="blockPlantas">
                     <div class="photo-area collapsed" id="photoPlantas">
                         <button class="add-photo-btn" onclick="addPhoto('plantas')">+</button>
@@ -418,7 +382,6 @@
                     </div>
                 </div>
                 
-                <!-- PMG -->
                 <div class="metric-block" id="blockPmg">
                     <div class="photo-area collapsed" id="photoPmg">
                         <button class="add-photo-btn" onclick="addPhoto('pmg')">+</button>
@@ -431,7 +394,6 @@
                     </div>
                 </div>
                 
-                <!-- Entrenós -->
                 <div class="metric-block" id="blockEntrenos">
                     <div class="photo-area collapsed" id="photoEntrenos">
                         <button class="add-photo-btn" onclick="addPhoto('entrenos')">+</button>
@@ -446,7 +408,6 @@
             </div>
         </section>
         
-        <!-- Resultado -->
         <section class="result">
             <div class="result-grid">
                 <div class="result-item"><small>kg/ha</small><div class="val" id="rKg">—</div></div>
@@ -464,7 +425,6 @@
             </div>
         </section>
         
-        <!-- Footer -->
         <section class="footer">
             <div class="footer-logo" onclick="document.getElementById('logoInput').click()" id="logoBox">Logo</div>
             <div class="footer-info">
@@ -473,10 +433,9 @@
             </div>
         </section>
         
-        <!-- Branding -->
         <div class="branding">
-            <a href="#">
-                <span class="brand-name"><span>Solo</span><span>Forte</span></span>
+            <a href="https://afonsoraudinei.github.io/Calculadorasoja/" target="_blank" id="brandingLink">
+                <span class="brand-solo">Solo</span><span class="brand-forte">Forte</span>
                 <span> — Fazer novo cálculo</span>
             </a>
         </div>
@@ -484,7 +443,7 @@
     
     <div class="fabs">
         <button class="fab fab-w" onclick="limpar()"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg></button>
-        <button class="fab fab-g" onclick="exportPDF()"><svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg></button>
+        <button class="fab fab-g" onclick="exportPDF()" title="Exportar PDF"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></button>
     </div>
     
     <input type="file" id="fileInput" accept="image/*" hidden>
@@ -509,11 +468,6 @@
         function loadData() {
             const d = JSON.parse(localStorage.getItem('soja_data')) || {};
             fields.forEach(id => { const el = document.getElementById(id); if (el && d[id]) el.value = d[id]; });
-            // Load notes
-            photoKeys.forEach(key => {
-                const noteEl = document.getElementById(`note_${key}`);
-                if (noteEl && photos[key]?.note) noteEl.value = photos[key].note;
-            });
         }
         
         function saveData() {
@@ -536,7 +490,6 @@
         
         function calc() {
             const plantasHa = calcPlantasHa();
-            const plantasAval = parseFloat(document.getElementById('plantasAval').value) || 3;
             const v = parseFloat(document.getElementById('vagens').value) || 0;
             const g = parseFloat(document.getElementById('graos').value) || 0;
             const pmg = parseFloat(document.getElementById('pmg').value) || 0;
@@ -576,7 +529,6 @@
             if (el) el.addEventListener('input', () => { calc(); saveData(); });
         });
         
-        // === FOTOS ===
         function renderAllPhotos() {
             photoKeys.forEach(key => renderPhoto(key));
         }
@@ -631,7 +583,6 @@
             renderPhoto(key);
         }
         
-        // === LOGO ===
         function renderLogo() {
             document.getElementById('logoBox').innerHTML = logo ? `<img src="${logo}">` : 'Logo';
         }
@@ -675,29 +626,52 @@
         }
         
         function exportPDF() {
+            // Mostrar detalhes
             document.getElementById('details').classList.add('show');
-            document.body.classList.add('pdf-mode');
             
+            // Configuração do PDF
             const opt = {
-                margin: [0.5, 0.5, 0.5, 0.5],
-                filename: 'producao-soja.pdf',
+                margin: [8, 8, 8, 8],
+                filename: 'estimativa-producao-soja.pdf',
                 image: { type: 'jpeg', quality: 0.95 },
                 html2canvas: { 
-                    scale: 2, 
+                    scale: 2,
                     useCORS: true,
-                    letterRendering: true
+                    logging: false,
+                    width: 400,
+                    windowWidth: 400
                 },
                 jsPDF: { 
-                    unit: 'cm', 
+                    unit: 'mm', 
                     format: 'a4', 
-                    orientation: 'portrait' 
+                    orientation: 'portrait'
                 },
                 pagebreak: { mode: 'avoid-all' }
             };
             
-            html2pdf().set(opt).from(document.getElementById('content')).save().then(() => {
-                document.body.classList.remove('pdf-mode');
-            });
+            // Gerar PDF
+            html2pdf()
+                .set(opt)
+                .from(document.getElementById('content'))
+                .toPdf()
+                .get('pdf')
+                .then(function(pdf) {
+                    // Adicionar link clicável no PDF
+                    const pageWidth = pdf.internal.pageSize.getWidth();
+                    const pageHeight = pdf.internal.pageSize.getHeight();
+                    
+                    // Link na parte inferior
+                    pdf.setFontSize(8);
+                    pdf.setTextColor(52, 199, 89);
+                    pdf.textWithLink('SoloForte — Fazer novo cálculo', pageWidth / 2, pageHeight - 5, {
+                        url: 'https://afonsoraudinei.github.io/Calculadorasoja/',
+                        align: 'center'
+                    });
+                })
+                .save()
+                .then(() => {
+                    document.getElementById('details').classList.remove('show');
+                });
         }
     </script>
 </body>
