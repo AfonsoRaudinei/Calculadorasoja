@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -6,760 +7,884 @@
     <title>Produção de Soja</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+```
+<style>
+    :root {
+        --green: #34C759;
+        --green-dark: #1B4332;
+        --green-light: #E8F5E9;
+        --bg: #F2F2F7;
+        --card: #FFF;
+        --text: #1D1D1F;
+        --text2: #8E8E93;
+        --text3: #C7C7CC;
+        --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    }
     
-    <style>
-        :root {
-            --green: #34C759;
-            --green-dark: #1B4332;
-            --green-light: #E8F5E9;
-            --bg: #F2F2F7;
-            --card: #FFF;
-            --text: #1D1D1F;
-            --text2: #8E8E93;
-            --text3: #C7C7CC;
-            --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; }
-        
-        .header {
-            background: linear-gradient(180deg, var(--green-dark), #14332B);
-            padding: 8px 12px;
-            text-align: center;
-        }
-        .header h1 { color: #FFF; font-size: 0.8rem; font-weight: 600; }
-        
-        .container { max-width: 360px; margin: 0 auto; padding: 4px 6px 60px; }
-        
-        .card {
-            background: var(--card);
-            border-radius: 8px;
-            margin-bottom: 4px;
-        }
-        
-        .card-head {
-            padding: 4px 8px 2px;
-            font-size: 0.5rem;
-            font-weight: 600;
-            color: var(--text2);
-            text-transform: uppercase;
-        }
-        
-        .card-body { padding: 2px 8px 6px; }
-        
-        .aviso {
-            background: #FFFBEB;
-            border-left: 2px solid #F59E0B;
-            border-radius: 0 6px 6px 0;
-            padding: 4px 6px;
-            margin-bottom: 4px;
-        }
-        .aviso-title { font-size: 0.55rem; font-weight: 600; color: #B45309; }
-        .aviso-text { font-size: 0.45rem; color: #92400E; line-height: 1.2; }
-        
-        .row { display: flex; gap: 4px; margin-bottom: 3px; }
-        .row:last-child { margin-bottom: 0; }
-        .col { flex: 1; min-width: 0; }
-        
-        label {
-            display: block;
-            font-size: 0.45rem;
-            color: var(--text2);
-            margin-bottom: 1px;
-            text-transform: uppercase;
-        }
-        
-        input, textarea {
-            width: 100%;
-            height: 24px;
-            background: var(--bg);
-            border: none;
-            border-radius: 4px;
-            padding: 0 4px;
-            font-size: 0.7rem;
-            font-family: var(--font);
-            color: var(--text);
-        }
-        
-        textarea {
-            height: 32px;
-            padding: 4px;
-            resize: none;
-            line-height: 1.2;
-        }
-        
-        input:focus, textarea:focus { outline: 2px solid var(--green); outline-offset: -2px; }
-        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; }
-        input[type=number] { -moz-appearance: textfield; }
-        
-        .unit { position: relative; }
-        .unit span {
-            position: absolute;
-            right: 4px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.45rem;
-            color: var(--text3);
-        }
-        .unit input { padding-right: 14px; }
-        
-        .calc-field input {
-            background: var(--green-light);
-            color: var(--green-dark);
-            font-weight: 600;
-        }
-        
-        .result-field input {
-            background: var(--green-light);
-            color: var(--green-dark);
-            font-weight: 600;
-            text-align: right;
-        }
-        
-        .metric {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 4px;
-        }
-        .metric:last-child { margin-bottom: 0; }
-        
-        .photo-col { width: 50px; flex-shrink: 0; }
-        .photo-col.empty { width: 18px; }
-        
-        .photo-box {
-            width: 50px;
-            height: 50px;
-            border-radius: 4px;
-            overflow: hidden;
-            background: var(--bg);
-            position: relative;
-        }
-        .photo-box img { width: 100%; height: 100%; object-fit: cover; }
-        .photo-box .del {
-            position: absolute;
-            top: 1px;
-            right: 1px;
-            width: 14px;
-            height: 14px;
-            background: rgba(0,0,0,0.5);
-            border: none;
-            border-radius: 50%;
-            color: #FFF;
-            font-size: 9px;
-            cursor: pointer;
-            line-height: 1;
-        }
-        
-        .photo-note { margin-top: 2px; }
-        .photo-note input {
-            height: 16px;
-            font-size: 0.45rem;
-            padding: 0 3px;
-        }
-        
-        .add-btn {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--bg);
-            border: none;
-            color: var(--text3);
-            font-size: 10px;
-            cursor: pointer;
-        }
-        .add-btn:hover { background: var(--green-light); color: var(--green); }
-        
-        .fields-col { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-        
-        .result {
-            background: linear-gradient(180deg, var(--green-dark), #14332B);
-            border-radius: 8px;
-            padding: 6px;
-            margin-bottom: 4px;
-        }
-        
-        .result-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3px;
-        }
-        
-        .result-item {
-            background: rgba(255,255,255,0.08);
-            border-radius: 4px;
-            padding: 4px 2px;
-            text-align: center;
-        }
-        
-        .result-main {
-            grid-column: 1 / -1;
-            background: var(--green);
-            margin-top: 3px;
-        }
-        
-        .result-item small {
-            display: block;
-            font-size: 0.4rem;
-            color: rgba(255,255,255,0.6);
-            text-transform: uppercase;
-        }
-        .result-item .val { font-size: 0.7rem; font-weight: 700; color: #FFF; }
-        .result-main .val { font-size: 1rem; }
-        .result-item .un { font-size: 0.35rem; color: rgba(255,255,255,0.5); }
-        
-        .toggle {
-            background: none;
-            border: none;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.4rem;
-            cursor: pointer;
-            margin-top: 3px;
-        }
-        
-        .details {
-            display: none;
-            margin-top: 3px;
-            padding-top: 3px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.4rem;
-        }
-        .details.show { display: block; }
-        .details div { display: flex; justify-content: space-between; color: rgba(255,255,255,0.5); }
-        .details span:last-child { color: rgba(255,255,255,0.8); }
-        
-        .footer {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            background: var(--card);
-            border-radius: 8px;
-            padding: 4px 6px;
-            margin-bottom: 4px;
-        }
-        
-        .footer-logo {
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            background: var(--bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            overflow: hidden;
-            font-size: 0.35rem;
-            color: var(--text3);
-        }
-        .footer-logo img { width: 100%; height: 100%; object-fit: contain; }
-        .footer-info { flex: 1; }
-        .footer-info input { height: 18px; font-size: 0.55rem; margin-bottom: 2px; }
-        
-        .branding {
-            text-align: center;
-            padding: 4px;
-            font-size: 0.45rem;
-        }
-        .branding a { text-decoration: none; color: var(--text2); }
-        .brand-solo { color: var(--text); font-weight: 600; }
-        .brand-forte { color: var(--green); font-weight: 600; }
-        
-        .fabs {
-            position: fixed;
-            bottom: 10px;
-            right: 6px;
-            display: flex;
-            gap: 6px;
-        }
-        .fab {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-        }
-        .fab-w { background: #FFF; }
-        .fab-w svg { width: 14px; height: 14px; fill: var(--text2); }
-        .fab-g { background: var(--green); }
-        .fab-g svg { width: 14px; height: 14px; fill: #FFF; }
-        
-        .loading {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-        }
-        .loading.show { display: flex; }
-        .loading-box {
-            background: #FFF;
-            padding: 20px 30px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        .loading-box p { font-size: 0.75rem; color: var(--text); margin-top: 8px; }
-        .spinner {
-            width: 30px;
-            height: 30px;
-            border: 3px solid var(--bg);
-            border-top-color: var(--green);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        
-        @media print {
-            .fabs, .add-btn, .photo-box .del { display: none !important; }
-            .details { display: block !important; }
-        }
-    </style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; }
+    
+    .header {
+        background: linear-gradient(180deg, var(--green-dark), #14332B);
+        padding: 8px 12px;
+        text-align: center;
+    }
+    .header h1 { color: #FFF; font-size: 0.8rem; font-weight: 600; }
+    
+    .container { max-width: 360px; margin: 0 auto; padding: 4px 6px 60px; }
+    
+    .card {
+        background: var(--card);
+        border-radius: 8px;
+        margin-bottom: 4px;
+    }
+    
+    .card-head {
+        padding: 4px 8px 2px;
+        font-size: 0.5rem;
+        font-weight: 600;
+        color: var(--text2);
+        text-transform: uppercase;
+    }
+    
+    .card-body { padding: 2px 8px 6px; }
+    
+    .aviso {
+        background: #FFFBEB;
+        border-left: 2px solid #F59E0B;
+        border-radius: 0 6px 6px 0;
+        padding: 4px 6px;
+        margin-bottom: 4px;
+    }
+    .aviso-title { font-size: 0.55rem; font-weight: 600; color: #B45309; }
+    .aviso-text { font-size: 0.45rem; color: #92400E; line-height: 1.2; }
+    
+    .row { display: flex; gap: 4px; margin-bottom: 3px; }
+    .row:last-child { margin-bottom: 0; }
+    .col { flex: 1; min-width: 0; }
+    
+    label {
+        display: block;
+        font-size: 0.45rem;
+        color: var(--text2);
+        margin-bottom: 1px;
+        text-transform: uppercase;
+    }
+    
+    input, textarea {
+        width: 100%;
+        height: 24px;
+        background: var(--bg);
+        border: none;
+        border-radius: 4px;
+        padding: 0 4px;
+        font-size: 0.7rem;
+        font-family: var(--font);
+        color: var(--text);
+    }
+    
+    textarea {
+        height: 32px;
+        padding: 4px;
+        resize: none;
+        line-height: 1.2;
+    }
+    
+    input:focus, textarea:focus { outline: 2px solid var(--green); outline-offset: -2px; }
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+    
+    .unit { position: relative; }
+    .unit span {
+        position: absolute;
+        right: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.45rem;
+        color: var(--text3);
+    }
+    .unit input { padding-right: 14px; }
+    
+    .calc-field input {
+        background: var(--green-light);
+        color: var(--green-dark);
+        font-weight: 600;
+    }
+    
+    .result-field input {
+        background: var(--green-light);
+        color: var(--green-dark);
+        font-weight: 600;
+        text-align: right;
+    }
+    
+    .metric {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 4px;
+    }
+    .metric:last-child { margin-bottom: 0; }
+    
+    .photo-col { width: 50px; flex-shrink: 0; }
+    .photo-col.empty { width: 18px; }
+    
+    .photo-box {
+        width: 50px;
+        height: 50px;
+        border-radius: 4px;
+        overflow: hidden;
+        background: var(--bg);
+        position: relative;
+    }
+    .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-box .del {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        width: 14px;
+        height: 14px;
+        background: rgba(0,0,0,0.5);
+        border: none;
+        border-radius: 50%;
+        color: #FFF;
+        font-size: 9px;
+        cursor: pointer;
+        line-height: 1;
+    }
+    
+    .photo-note { margin-top: 2px; }
+    .photo-note input {
+        height: 16px;
+        font-size: 0.45rem;
+        padding: 0 3px;
+    }
+    
+    .add-btn {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--bg);
+        border: none;
+        color: var(--text3);
+        font-size: 10px;
+        cursor: pointer;
+    }
+    .add-btn:hover { background: var(--green-light); color: var(--green); }
+    
+    .fields-col { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    
+    .result {
+        background: linear-gradient(180deg, var(--green-dark), #14332B);
+        border-radius: 8px;
+        padding: 6px;
+        margin-bottom: 4px;
+    }
+    
+    .result-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3px;
+    }
+    
+    .result-item {
+        background: rgba(255,255,255,0.08);
+        border-radius: 4px;
+        padding: 4px 2px;
+        text-align: center;
+    }
+    
+    .result-main {
+        grid-column: 1 / -1;
+        background: var(--green);
+        margin-top: 3px;
+    }
+    
+    .result-item small {
+        display: block;
+        font-size: 0.4rem;
+        color: rgba(255,255,255,0.6);
+        text-transform: uppercase;
+    }
+    .result-item .val { font-size: 0.7rem; font-weight: 700; color: #FFF; }
+    .result-main .val { font-size: 1rem; }
+    .result-item .un { font-size: 0.35rem; color: rgba(255,255,255,0.5); }
+    
+    .toggle {
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.4);
+        font-size: 0.4rem;
+        cursor: pointer;
+        margin-top: 3px;
+    }
+    
+    .details {
+        display: none;
+        margin-top: 3px;
+        padding-top: 3px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        font-size: 0.4rem;
+    }
+    .details.show { display: block; }
+    .details div { display: flex; justify-content: space-between; color: rgba(255,255,255,0.5); }
+    .details span:last-child { color: rgba(255,255,255,0.8); }
+    
+    .footer {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--card);
+        border-radius: 8px;
+        padding: 4px 6px;
+        margin-bottom: 4px;
+    }
+    
+    .footer-logo {
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        overflow: hidden;
+        font-size: 0.35rem;
+        color: var(--text3);
+    }
+    .footer-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .footer-info { flex: 1; }
+    .footer-info input { height: 18px; font-size: 0.55rem; margin-bottom: 2px; }
+    
+    .branding {
+        text-align: center;
+        padding: 4px;
+        font-size: 0.45rem;
+    }
+    .branding a { text-decoration: none; color: var(--text2); }
+    .brand-solo { color: var(--text); font-weight: 600; }
+    .brand-forte { color: var(--green); font-weight: 600; }
+    
+    .fabs {
+        position: fixed;
+        bottom: 10px;
+        right: 6px;
+        display: flex;
+        gap: 6px;
+    }
+    .fab {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+    .fab-w { background: #FFF; }
+    .fab-w svg { width: 14px; height: 14px; fill: var(--text2); }
+    .fab-g { background: var(--green); }
+    .fab-g svg { width: 14px; height: 14px; fill: #FFF; }
+    
+    .loading {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+    }
+    .loading.show { display: flex; }
+    .loading-box {
+        background: #FFF;
+        padding: 20px 30px;
+        border-radius: 12px;
+        text-align: center;
+    }
+    .loading-box p { font-size: 0.75rem; color: var(--text); margin-top: 8px; }
+    .spinner {
+        width: 30px;
+        height: 30px;
+        border: 3px solid var(--bg);
+        border-top-color: var(--green);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin: 0 auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    
+    /* Modal de opções */
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        align-items: flex-end;
+        justify-content: center;
+        z-index: 1000;
+        padding: 20px;
+    }
+    .modal.show { display: flex; }
+    .modal-content {
+        background: #FFF;
+        border-radius: 14px;
+        width: 100%;
+        max-width: 360px;
+        overflow: hidden;
+    }
+    .modal-btn {
+        width: 100%;
+        padding: 16px;
+        border: none;
+        background: #FFF;
+        font-size: 1rem;
+        color: #007AFF;
+        cursor: pointer;
+        border-bottom: 1px solid #E5E5EA;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    .modal-btn:last-child { border-bottom: none; }
+    .modal-btn:active { background: #F2F2F7; }
+    .modal-btn svg { width: 22px; height: 22px; }
+    .modal-btn.whatsapp { color: #25D366; }
+    .modal-btn.whatsapp svg { fill: #25D366; }
+    .modal-btn.download svg { fill: #007AFF; }
+    .modal-cancel {
+        margin-top: 8px;
+        border-radius: 14px;
+    }
+    .modal-cancel .modal-btn {
+        font-weight: 600;
+        color: #007AFF;
+    }
+</style>
+```
+
 </head>
 <body>
     <header class="header">
         <h1>Estimativa de Produção — Soja</h1>
     </header>
-    
-    <main class="container" id="content">
-        <div class="aviso">
-            <div class="aviso-title">📌 Expectativa de Produção (Estimativa Técnica)</div>
-            <div class="aviso-text">📢 Os números são projeções técnicas e não garantem resultados absolutos, sujeitos a variações climáticas, de manejo e campo.</div>
-        </div>
-        
-        <section class="card">
-            <div class="card-head">Identificação</div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col"><label>Produtor</label><input type="text" id="produtor" placeholder="—"></div>
-                    <div class="col"><label>Fazenda</label><input type="text" id="fazenda" placeholder="—"></div>
-                </div>
-                <div class="row">
-                    <div class="col"><label>Cidade/UF</label><input type="text" id="cidade" placeholder="—"></div>
-                    <div class="col"><label>Cultivar</label><input type="text" id="cultivar" placeholder="—"></div>
-                </div>
-                <div class="row">
-                    <div class="col unit"><label>Área</label><input type="number" id="area" placeholder="—" step="0.1"><span>ha</span></div>
-                    <div class="col"><label>Data</label><input type="date" id="data"></div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="card">
-            <div class="card-head">População</div>
-            <div class="card-body">
-                <div class="metric" id="metricLavoura">
-                    <div class="photo-col empty" id="photoLavoura">
-                        <button class="add-btn" onclick="addPhoto('lavoura')">+</button>
-                    </div>
-                    <div class="fields-col">
-                        <div class="row">
-                            <div class="col"><label>Plantas/Metro</label><input type="number" id="plantasMetro" placeholder="—" step="0.1"></div>
-                            <div class="col unit"><label>Espaçamento</label><input type="number" id="espacamento" value="0.5" step="0.05"><span>m</span></div>
-                        </div>
-                        <div class="row">
-                            <div class="col calc-field"><label>Plantas/ha</label><input type="text" id="plantasHa" readonly></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="card">
-            <div class="card-head">Componentes de Rendimento</div>
-            <div class="card-body">
-                <div class="metric" id="metricPlantas">
-                    <div class="photo-col empty" id="photoPlantas">
-                        <button class="add-btn" onclick="addPhoto('plantas')">+</button>
-                    </div>
-                    <div class="fields-col">
-                        <div class="row">
-                            <div class="col"><label>Plantas Aval.</label><input type="number" id="plantasAval" value="3" min="1"></div>
-                            <div class="col"><label>Vagens/Pl</label><input type="number" id="vagens" placeholder="—" step="0.1"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label>Grãos/Vagem</label><input type="number" id="graos" placeholder="—" step="0.1"></div>
-                            <div class="col result-field"><label>Grãos/Pl</label><input type="text" id="rGraosPl" readonly></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="metric" id="metricPmg">
-                    <div class="photo-col empty" id="photoPmg">
-                        <button class="add-btn" onclick="addPhoto('pmg')">+</button>
-                    </div>
-                    <div class="fields-col">
-                        <div class="row">
-                            <div class="col unit"><label>PMG</label><input type="number" id="pmg" placeholder="—" step="0.1"><span>g</span></div>
-                            <div class="col result-field"><label>g/Planta</label><input type="text" id="rGramasPl" readonly></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="metric" id="metricEntrenos">
-                    <div class="photo-col empty" id="photoEntrenos">
-                        <button class="add-btn" onclick="addPhoto('entrenos')">+</button>
-                    </div>
-                    <div class="fields-col">
-                        <div class="row">
-                            <div class="col"><label>Entrenós/Pl</label><input type="number" id="entrenos" placeholder="—"></div>
-                            <div class="col unit"><label>Perdas</label><input type="number" id="perdas" value="20"><span>%</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="card">
-            <div class="card-head">Observações</div>
-            <div class="card-body">
-                <textarea id="anotacaoGeral" placeholder="Anotações gerais..."></textarea>
-            </div>
-        </section>
-        
-        <section class="result">
-            <div class="result-grid">
-                <div class="result-item"><small>kg/ha</small><div class="val" id="rKg">—</div></div>
-                <div class="result-item"><small>Bruto</small><div class="val" id="rBruto">—</div><div class="un">sc/ha</div></div>
-                <div class="result-item"><small>Líquido</small><div class="val" id="rLiqItem">—</div><div class="un">sc/ha</div></div>
-                <div class="result-item result-main"><small>Produção Estimada</small><div class="val" id="rLiquido">—</div><div class="un">sacas/ha</div></div>
-            </div>
-            <button class="toggle" onclick="toggleDetails()">▼ Detalhes</button>
-            <div class="details" id="details">
-                <div><span>Grãos/pl</span><span id="d1">—</span></div>
-                <div><span>g/pl</span><span id="d2">—</span></div>
-                <div><span>kg/ha</span><span id="d3">—</span></div>
-                <div><span>Bruto</span><span id="d4">—</span></div>
-                <div><span>Líquido</span><span id="d5">—</span></div>
-            </div>
-        </section>
-        
-        <section class="footer">
-            <div class="footer-logo" onclick="document.getElementById('logoInput').click()" id="logoBox">Logo</div>
-            <div class="footer-info">
-                <input type="text" id="editorNome" placeholder="Responsável técnico">
-                <input type="text" id="editorContato" placeholder="Contato / CREA">
-            </div>
-        </section>
-        
-        <div class="branding" id="branding">
-            <a href="https://afonsoraudinei.github.io/Calculadorasoja/" target="_blank">
-                <span class="brand-solo">Solo</span><span class="brand-forte">Forte</span>
-                <span> — Fazer novo cálculo</span>
-            </a>
-        </div>
-    </main>
-    
-    <div class="fabs" id="fabs">
-        <button class="fab fab-w" onclick="limpar()"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
-        <button class="fab fab-g" onclick="exportPDF()" title="Exportar/Compartilhar PDF"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
+
+```
+<main class="container" id="content">
+    <div class="aviso">
+        <div class="aviso-title">📌 Expectativa de Produção (Estimativa Técnica)</div>
+        <div class="aviso-text">📢 Os números são projeções técnicas e não garantem resultados absolutos, sujeitos a variações climáticas, de manejo e campo.</div>
     </div>
     
-    <div class="loading" id="loading">
-        <div class="loading-box">
-            <div class="spinner"></div>
-            <p>Gerando PDF...</p>
+    <section class="card">
+        <div class="card-head">Identificação</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col"><label>Produtor</label><input type="text" id="produtor" placeholder="—"></div>
+                <div class="col"><label>Fazenda</label><input type="text" id="fazenda" placeholder="—"></div>
+            </div>
+            <div class="row">
+                <div class="col"><label>Cidade/UF</label><input type="text" id="cidade" placeholder="—"></div>
+                <div class="col"><label>Cultivar</label><input type="text" id="cultivar" placeholder="—"></div>
+            </div>
+            <div class="row">
+                <div class="col unit"><label>Área</label><input type="number" id="area" placeholder="—" step="0.1"><span>ha</span></div>
+                <div class="col"><label>Data</label><input type="date" id="data"></div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="card">
+        <div class="card-head">População</div>
+        <div class="card-body">
+            <div class="metric" id="metricLavoura">
+                <div class="photo-col empty" id="photoLavoura">
+                    <button class="add-btn" onclick="addPhoto('lavoura')">+</button>
+                </div>
+                <div class="fields-col">
+                    <div class="row">
+                        <div class="col"><label>Plantas/Metro</label><input type="number" id="plantasMetro" placeholder="—" step="0.1"></div>
+                        <div class="col unit"><label>Espaçamento</label><input type="number" id="espacamento" value="0.5" step="0.05"><span>m</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col calc-field"><label>Plantas/ha</label><input type="text" id="plantasHa" readonly></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="card">
+        <div class="card-head">Componentes de Rendimento</div>
+        <div class="card-body">
+            <div class="metric" id="metricPlantas">
+                <div class="photo-col empty" id="photoPlantas">
+                    <button class="add-btn" onclick="addPhoto('plantas')">+</button>
+                </div>
+                <div class="fields-col">
+                    <div class="row">
+                        <div class="col"><label>Plantas Aval.</label><input type="number" id="plantasAval" value="3" min="1"></div>
+                        <div class="col"><label>Vagens/Pl</label><input type="number" id="vagens" placeholder="—" step="0.1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><label>Grãos/Vagem</label><input type="number" id="graos" placeholder="—" step="0.1"></div>
+                        <div class="col result-field"><label>Grãos/Pl</label><input type="text" id="rGraosPl" readonly></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="metric" id="metricPmg">
+                <div class="photo-col empty" id="photoPmg">
+                    <button class="add-btn" onclick="addPhoto('pmg')">+</button>
+                </div>
+                <div class="fields-col">
+                    <div class="row">
+                        <div class="col unit"><label>PMG</label><input type="number" id="pmg" placeholder="—" step="0.1"><span>g</span></div>
+                        <div class="col result-field"><label>g/Planta</label><input type="text" id="rGramasPl" readonly></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="metric" id="metricEntrenos">
+                <div class="photo-col empty" id="photoEntrenos">
+                    <button class="add-btn" onclick="addPhoto('entrenos')">+</button>
+                </div>
+                <div class="fields-col">
+                    <div class="row">
+                        <div class="col"><label>Entrenós/Pl</label><input type="number" id="entrenos" placeholder="—"></div>
+                        <div class="col unit"><label>Perdas</label><input type="number" id="perdas" value="20"><span>%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="card">
+        <div class="card-head">Observações</div>
+        <div class="card-body">
+            <textarea id="anotacaoGeral" placeholder="Anotações gerais..."></textarea>
+        </div>
+    </section>
+    
+    <section class="result">
+        <div class="result-grid">
+            <div class="result-item"><small>kg/ha</small><div class="val" id="rKg">—</div></div>
+            <div class="result-item"><small>Bruto</small><div class="val" id="rBruto">—</div><div class="un">sc/ha</div></div>
+            <div class="result-item"><small>Líquido</small><div class="val" id="rLiqItem">—</div><div class="un">sc/ha</div></div>
+            <div class="result-item result-main"><small>Produção Estimada</small><div class="val" id="rLiquido">—</div><div class="un">sacas/ha</div></div>
+        </div>
+        <button class="toggle" onclick="toggleDetails()">▼ Detalhes</button>
+        <div class="details" id="details">
+            <div><span>Grãos/pl</span><span id="d1">—</span></div>
+            <div><span>g/pl</span><span id="d2">—</span></div>
+            <div><span>kg/ha</span><span id="d3">—</span></div>
+            <div><span>Bruto</span><span id="d4">—</span></div>
+            <div><span>Líquido</span><span id="d5">—</span></div>
+        </div>
+    </section>
+    
+    <section class="footer">
+        <div class="footer-logo" onclick="document.getElementById('logoInput').click()" id="logoBox">Logo</div>
+        <div class="footer-info">
+            <input type="text" id="editorNome" placeholder="Responsável técnico">
+            <input type="text" id="editorContato" placeholder="Contato / CREA">
+        </div>
+    </section>
+    
+    <div class="branding" id="branding">
+        <a href="https://afonsoraudinei.github.io/Calculadorasoja/" target="_blank">
+            <span class="brand-solo">Solo</span><span class="brand-forte">Forte</span>
+            <span> — Fazer novo cálculo</span>
+        </a>
+    </div>
+</main>
+
+<div class="fabs" id="fabs">
+    <button class="fab fab-w" onclick="limpar()"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+    <button class="fab fab-g" onclick="showOptions()" title="Exportar PDF"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
+</div>
+
+<div class="loading" id="loading">
+    <div class="loading-box">
+        <div class="spinner"></div>
+        <p id="loadingText">Gerando PDF...</p>
+    </div>
+</div>
+
+<!-- Modal de opções -->
+<div class="modal" id="modal" onclick="hideModal(event)">
+    <div>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-btn whatsapp" onclick="exportAndShare('whatsapp')">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Enviar via WhatsApp
+            </button>
+            <button class="modal-btn download" onclick="exportAndShare('download')">
+                <svg viewBox="0 0 24 24" fill="#007AFF"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                Salvar no celular
+            </button>
+        </div>
+        <div class="modal-content modal-cancel">
+            <button class="modal-btn" onclick="hideModal()">Cancelar</button>
         </div>
     </div>
+</div>
+
+<input type="file" id="fileInput" accept="image/*" hidden>
+<input type="file" id="logoInput" accept="image/*" hidden>
+
+<script>
+    let photos = JSON.parse(localStorage.getItem('soja_photos')) || {};
+    let logo = localStorage.getItem('soja_logo') || null;
+    let currentKey = null;
+    let pdfBlob = null;
+    let pdfFileName = '';
     
-    <input type="file" id="fileInput" accept="image/*" hidden>
-    <input type="file" id="logoInput" accept="image/*" hidden>
+    const fields = ['produtor','fazenda','cidade','cultivar','area','data','plantasMetro','espacamento','plantasAval','vagens','graos','pmg','entrenos','perdas','editorNome','editorContato','anotacaoGeral'];
+    const photoKeys = ['lavoura','plantas','pmg','entrenos'];
     
-    <script>
-        let photos = JSON.parse(localStorage.getItem('soja_photos')) || {};
-        let logo = localStorage.getItem('soja_logo') || null;
-        let currentKey = null;
-        
-        const fields = ['produtor','fazenda','cidade','cultivar','area','data','plantasMetro','espacamento','plantasAval','vagens','graos','pmg','entrenos','perdas','editorNome','editorContato','anotacaoGeral'];
-        const photoKeys = ['lavoura','plantas','pmg','entrenos'];
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            loadData();
-            renderPhotos();
-            renderLogo();
-            calc();
-            if (!document.getElementById('data').value) document.getElementById('data').valueAsDate = new Date();
+    document.addEventListener('DOMContentLoaded', () => {
+        loadData();
+        renderPhotos();
+        renderLogo();
+        calc();
+        if (!document.getElementById('data').value) document.getElementById('data').valueAsDate = new Date();
+    });
+    
+    function loadData() {
+        const d = JSON.parse(localStorage.getItem('soja_data')) || {};
+        fields.forEach(id => { 
+            const el = document.getElementById(id); 
+            if (el && d[id]) el.value = d[id]; 
         });
-        
-        function loadData() {
-            const d = JSON.parse(localStorage.getItem('soja_data')) || {};
-            fields.forEach(id => { 
-                const el = document.getElementById(id); 
-                if (el && d[id]) el.value = d[id]; 
-            });
-        }
-        
-        function saveData() {
-            const d = {};
-            fields.forEach(id => { 
-                const el = document.getElementById(id); 
-                if (el) d[id] = el.value; 
-            });
-            localStorage.setItem('soja_data', JSON.stringify(d));
-        }
-        
-        function calcPlantasHa() {
-            const pm = parseFloat(document.getElementById('plantasMetro').value) || 0;
-            const esp = parseFloat(document.getElementById('espacamento').value) || 0.5;
-            if (pm && esp) {
-                const pl = Math.round(pm * (10000 / esp));
-                document.getElementById('plantasHa').value = pl.toLocaleString('pt-BR');
-                return pl;
-            }
-            document.getElementById('plantasHa').value = '';
-            return 0;
-        }
-        
-        function calc() {
-            const plantasHa = calcPlantasHa();
-            const v = parseFloat(document.getElementById('vagens').value) || 0;
-            const g = parseFloat(document.getElementById('graos').value) || 0;
-            const pmg = parseFloat(document.getElementById('pmg').value) || 0;
-            const p = parseFloat(document.getElementById('perdas').value) || 0;
-            
-            const graosPl = v * g;
-            document.getElementById('rGraosPl').value = graosPl ? graosPl.toFixed(1) : '';
-            
-            const gramasPl = graosPl * (pmg / 1000);
-            document.getElementById('rGramasPl').value = gramasPl ? gramasPl.toFixed(2) : '';
-            
-            if (!plantasHa || !v || !g || !pmg) {
-                ['rKg','rBruto','rLiqItem','rLiquido'].forEach(id => document.getElementById(id).textContent = '—');
-                return;
-            }
-            
-            const kgHa = (plantasHa * gramasPl) / 1000;
-            const scB = kgHa / 60;
-            const scL = scB * (1 - p / 100);
-            
-            document.getElementById('rKg').textContent = kgHa.toFixed(0);
-            document.getElementById('rBruto').textContent = scB.toFixed(1);
-            document.getElementById('rLiqItem').textContent = scL.toFixed(1);
-            document.getElementById('rLiquido').textContent = scL.toFixed(2);
-            
-            document.getElementById('d1').textContent = `${v}×${g}=${graosPl.toFixed(1)}`;
-            document.getElementById('d2').textContent = `${gramasPl.toFixed(2)}g`;
-            document.getElementById('d3').textContent = `${kgHa.toFixed(0)}`;
-            document.getElementById('d4').textContent = `${scB.toFixed(2)}sc`;
-            document.getElementById('d5').textContent = `${scL.toFixed(2)}sc`;
-            
-            saveData();
-        }
-        
-        function toggleDetails() {
-            document.getElementById('details').classList.toggle('show');
-        }
-        
-        fields.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.addEventListener('input', () => { calc(); saveData(); });
+    }
+    
+    function saveData() {
+        const d = {};
+        fields.forEach(id => { 
+            const el = document.getElementById(id); 
+            if (el) d[id] = el.value; 
         });
+        localStorage.setItem('soja_data', JSON.stringify(d));
+    }
+    
+    function calcPlantasHa() {
+        const pm = parseFloat(document.getElementById('plantasMetro').value) || 0;
+        const esp = parseFloat(document.getElementById('espacamento').value) || 0.5;
+        if (pm && esp) {
+            const pl = Math.round(pm * (10000 / esp));
+            document.getElementById('plantasHa').value = pl.toLocaleString('pt-BR');
+            return pl;
+        }
+        document.getElementById('plantasHa').value = '';
+        return 0;
+    }
+    
+    function calc() {
+        const plantasHa = calcPlantasHa();
+        const v = parseFloat(document.getElementById('vagens').value) || 0;
+        const g = parseFloat(document.getElementById('graos').value) || 0;
+        const pmg = parseFloat(document.getElementById('pmg').value) || 0;
+        const p = parseFloat(document.getElementById('perdas').value) || 0;
         
-        function renderPhotos() {
-            photoKeys.forEach(key => {
-                const col = document.getElementById(`photo${key.charAt(0).toUpperCase() + key.slice(1)}`);
-                if (!col) return;
-                
-                if (photos[key]?.src) {
-                    col.classList.remove('empty');
-                    col.innerHTML = `
-                        <div class="photo-box">
-                            <img src="${photos[key].src}">
-                            <button class="del" onclick="delPhoto('${key}')">×</button>
-                        </div>
-                        <div class="photo-note">
-                            <input placeholder="Nota" value="${photos[key].note||''}" oninput="saveNote('${key}',this.value)">
-                        </div>
-                    `;
-                } else {
-                    col.classList.add('empty');
-                    col.innerHTML = `<button class="add-btn" onclick="addPhoto('${key}')">+</button>`;
-                }
-            });
+        const graosPl = v * g;
+        document.getElementById('rGraosPl').value = graosPl ? graosPl.toFixed(1) : '';
+        
+        const gramasPl = graosPl * (pmg / 1000);
+        document.getElementById('rGramasPl').value = gramasPl ? gramasPl.toFixed(2) : '';
+        
+        if (!plantasHa || !v || !g || !pmg) {
+            ['rKg','rBruto','rLiqItem','rLiquido'].forEach(id => document.getElementById(id).textContent = '—');
+            return;
         }
         
-        function addPhoto(key) {
-            currentKey = key;
-            document.getElementById('fileInput').click();
-        }
+        const kgHa = (plantasHa * gramasPl) / 1000;
+        const scB = kgHa / 60;
+        const scL = scB * (1 - p / 100);
         
-        document.getElementById('fileInput').addEventListener('change', async e => {
-            const f = e.target.files[0];
-            if (!f || !currentKey) return;
-            photos[currentKey] = { src: await compress(f, 400, 0.5), note: '' };
+        document.getElementById('rKg').textContent = kgHa.toFixed(0);
+        document.getElementById('rBruto').textContent = scB.toFixed(1);
+        document.getElementById('rLiqItem').textContent = scL.toFixed(1);
+        document.getElementById('rLiquido').textContent = scL.toFixed(2);
+        
+        document.getElementById('d1').textContent = `${v}×${g}=${graosPl.toFixed(1)}`;
+        document.getElementById('d2').textContent = `${gramasPl.toFixed(2)}g`;
+        document.getElementById('d3').textContent = `${kgHa.toFixed(0)}`;
+        document.getElementById('d4').textContent = `${scB.toFixed(2)}sc`;
+        document.getElementById('d5').textContent = `${scL.toFixed(2)}sc`;
+        
+        saveData();
+    }
+    
+    function toggleDetails() {
+        document.getElementById('details').classList.toggle('show');
+    }
+    
+    fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', () => { calc(); saveData(); });
+    });
+    
+    function renderPhotos() {
+        photoKeys.forEach(key => {
+            const col = document.getElementById(`photo${key.charAt(0).toUpperCase() + key.slice(1)}`);
+            if (!col) return;
+            
+            if (photos[key]?.src) {
+                col.classList.remove('empty');
+                col.innerHTML = `
+                    <div class="photo-box">
+                        <img src="${photos[key].src}">
+                        <button class="del" onclick="delPhoto('${key}')">×</button>
+                    </div>
+                    <div class="photo-note">
+                        <input placeholder="Nota" value="${photos[key].note||''}" oninput="saveNote('${key}',this.value)">
+                    </div>
+                `;
+            } else {
+                col.classList.add('empty');
+                col.innerHTML = `<button class="add-btn" onclick="addPhoto('${key}')">+</button>`;
+            }
+        });
+    }
+    
+    function addPhoto(key) {
+        currentKey = key;
+        document.getElementById('fileInput').click();
+    }
+    
+    document.getElementById('fileInput').addEventListener('change', async e => {
+        const f = e.target.files[0];
+        if (!f || !currentKey) return;
+        photos[currentKey] = { src: await compress(f, 400, 0.5), note: '' };
+        localStorage.setItem('soja_photos', JSON.stringify(photos));
+        renderPhotos();
+        e.target.value = '';
+    });
+    
+    function saveNote(key, val) {
+        if (photos[key]) {
+            photos[key].note = val;
             localStorage.setItem('soja_photos', JSON.stringify(photos));
-            renderPhotos();
-            e.target.value = '';
-        });
-        
-        function saveNote(key, val) {
-            if (photos[key]) {
-                photos[key].note = val;
-                localStorage.setItem('soja_photos', JSON.stringify(photos));
-            }
         }
-        
-        function delPhoto(key) {
-            delete photos[key];
-            localStorage.setItem('soja_photos', JSON.stringify(photos));
-            renderPhotos();
-        }
-        
-        function renderLogo() {
-            document.getElementById('logoBox').innerHTML = logo ? `<img src="${logo}">` : 'Logo';
-        }
-        
-        document.getElementById('logoInput').addEventListener('change', async e => {
-            const f = e.target.files[0];
-            if (!f) return;
-            logo = await compress(f, 60, 0.4);
-            localStorage.setItem('soja_logo', logo);
-            renderLogo();
-            e.target.value = '';
-        });
-        
-        function compress(file, max, q) {
-            return new Promise(r => {
-                const reader = new FileReader();
-                reader.onload = e => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const c = document.createElement('canvas');
-                        let w = img.width, h = img.height;
-                        if (w > h && w > max) { h = h * max / w; w = max; }
-                        else if (h > max) { w = w * max / h; h = max; }
-                        c.width = w; c.height = h;
-                        c.getContext('2d').drawImage(img, 0, 0, w, h);
-                        r(c.toDataURL('image/jpeg', q));
-                    };
-                    img.src = e.target.result;
+    }
+    
+    function delPhoto(key) {
+        delete photos[key];
+        localStorage.setItem('soja_photos', JSON.stringify(photos));
+        renderPhotos();
+    }
+    
+    function renderLogo() {
+        document.getElementById('logoBox').innerHTML = logo ? `<img src="${logo}">` : 'Logo';
+    }
+    
+    document.getElementById('logoInput').addEventListener('change', async e => {
+        const f = e.target.files[0];
+        if (!f) return;
+        logo = await compress(f, 60, 0.4);
+        localStorage.setItem('soja_logo', logo);
+        renderLogo();
+        e.target.value = '';
+    });
+    
+    function compress(file, max, q) {
+        return new Promise(r => {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = new Image();
+                img.onload = () => {
+                    const c = document.createElement('canvas');
+                    let w = img.width, h = img.height;
+                    if (w > h && w > max) { h = h * max / w; w = max; }
+                    else if (h > max) { w = w * max / h; h = max; }
+                    c.width = w; c.height = h;
+                    c.getContext('2d').drawImage(img, 0, 0, w, h);
+                    r(c.toDataURL('image/jpeg', q));
                 };
-                reader.readAsDataURL(file);
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    
+    function limpar() {
+        if (confirm('Limpar todos os dados?')) {
+            localStorage.removeItem('soja_data');
+            localStorage.removeItem('soja_photos');
+            localStorage.removeItem('soja_logo');
+            location.reload();
+        }
+    }
+    
+    function showOptions() {
+        document.getElementById('modal').classList.add('show');
+    }
+    
+    function hideModal(e) {
+        if (!e || e.target === document.getElementById('modal')) {
+            document.getElementById('modal').classList.remove('show');
+        }
+    }
+    
+    async function generatePDF() {
+        const loading = document.getElementById('loading');
+        const fabs = document.getElementById('fabs');
+        const details = document.getElementById('details');
+        const content = document.getElementById('content');
+        
+        loading.classList.add('show');
+        fabs.style.display = 'none';
+        details.classList.add('show');
+        
+        document.querySelectorAll('.add-btn, .del').forEach(el => el.style.visibility = 'hidden');
+        
+        try {
+            // Aguardar bibliotecas carregarem
+            await new Promise(r => setTimeout(r, 100));
+            
+            const canvas = await html2canvas(content, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#F2F2F7',
+                width: 360,
+                windowWidth: 360,
+                logging: false
             });
-        }
-        
-        function limpar() {
-            if (confirm('Limpar todos os dados?')) {
-                localStorage.removeItem('soja_data');
-                localStorage.removeItem('soja_photos');
-                localStorage.removeItem('soja_logo');
-                location.reload();
-            }
-        }
-        
-        async function exportPDF() {
-            const loading = document.getElementById('loading');
-            const fabs = document.getElementById('fabs');
-            const details = document.getElementById('details');
-            const content = document.getElementById('content');
             
-            loading.classList.add('show');
-            fabs.style.display = 'none';
-            details.classList.add('show');
+            const imgData = canvas.toDataURL('image/jpeg', 0.92);
             
-            // Esconder botões de deletar e adicionar
-            document.querySelectorAll('.add-btn, .del').forEach(el => el.style.visibility = 'hidden');
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
             
-            try {
-                // Capturar como imagem
-                const canvas = await html2canvas(content, {
-                    scale: 2,
-                    useCORS: true,
-                    backgroundColor: '#F2F2F7',
-                    width: 360,
-                    windowWidth: 360
-                });
-                
-                const imgData = canvas.toDataURL('image/jpeg', 0.95);
-                
-                // Criar PDF
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                
-                const pageWidth = 210;
-                const pageHeight = 297;
-                const margin = 8;
-                const maxWidth = pageWidth - (margin * 2);
-                const maxHeight = pageHeight - (margin * 2) - 10; // 10mm para rodapé
-                
-                // Calcular dimensões proporcionais
-                const imgRatio = canvas.width / canvas.height;
-                let finalWidth = maxWidth;
-                let finalHeight = finalWidth / imgRatio;
-                
-                // Se altura exceder, ajustar
-                if (finalHeight > maxHeight) {
-                    finalHeight = maxHeight;
-                    finalWidth = finalHeight * imgRatio;
-                }
-                
-                const x = (pageWidth - finalWidth) / 2;
-                const y = margin;
-                
-                pdf.addImage(imgData, 'JPEG', x, y, finalWidth, finalHeight);
-                
-                // Adicionar link clicável no rodapé
-                const linkY = pageHeight - 8;
-                const linkText = 'SoloForte — Fazer novo cálculo';
-                const linkUrl = 'https://afonsoraudinei.github.io/Calculadorasoja/';
-                
-                pdf.setFontSize(9);
-                pdf.setTextColor(29, 29, 31); // Preto para "Solo"
-                const soloWidth = pdf.getTextWidth('Solo');
-                const forteWidth = pdf.getTextWidth('Forte');
-                const restWidth = pdf.getTextWidth(' — Fazer novo cálculo');
-                const totalWidth = soloWidth + forteWidth + restWidth;
-                const startX = (pageWidth - totalWidth) / 2;
-                
-                // Desenhar texto colorido
-                pdf.text('Solo', startX, linkY);
-                pdf.setTextColor(52, 199, 89); // Verde para "Forte"
-                pdf.text('Forte', startX + soloWidth, linkY);
-                pdf.setTextColor(142, 142, 147); // Cinza para o resto
-                pdf.text(' — Fazer novo cálculo', startX + soloWidth + forteWidth, linkY);
-                
-                // Adicionar link clicável na área do texto
-                pdf.link(startX, linkY - 4, totalWidth, 6, { url: linkUrl });
-                
-                // Gerar blob do PDF
-                const pdfBlob = pdf.output('blob');
-                const fileName = `estimativa-soja-${new Date().toISOString().slice(0,10)}.pdf`;
-                const file = new File([pdfBlob], fileName, { type: 'application/pdf' });
-                
-                // Usar Web Share API se disponível (abre menu compartilhar no celular)
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    await navigator.share({
-                        files: [file],
-                        title: 'Estimativa de Produção - Soja'
-                    });
-                } else {
-                    // Fallback: download direto
-                    const url = URL.createObjectURL(pdfBlob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = fileName;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                }
-                
-            } catch (err) {
-                console.error('Erro ao gerar PDF:', err);
-                alert('Erro ao gerar PDF. Tente novamente.');
+            const pageWidth = 210;
+            const pageHeight = 297;
+            const margin = 8;
+            const maxWidth = pageWidth - (margin * 2);
+            const maxHeight = pageHeight - (margin * 2) - 10;
+            
+            const imgRatio = canvas.width / canvas.height;
+            let finalWidth = maxWidth;
+            let finalHeight = finalWidth / imgRatio;
+            
+            if (finalHeight > maxHeight) {
+                finalHeight = maxHeight;
+                finalWidth = finalHeight * imgRatio;
             }
             
-            // Restaurar
+            const x = (pageWidth - finalWidth) / 2;
+            const y = margin;
+            
+            pdf.addImage(imgData, 'JPEG', x, y, finalWidth, finalHeight);
+            
+            // Link no rodapé
+            const linkY = pageHeight - 8;
+            const linkUrl = 'https://afonsoraudinei.github.io/Calculadorasoja/';
+            
+            pdf.setFontSize(9);
+            pdf.setTextColor(29, 29, 31);
+            const soloW = pdf.getTextWidth('Solo');
+            pdf.setTextColor(52, 199, 89);
+            const forteW = pdf.getTextWidth('Forte');
+            pdf.setTextColor(142, 142, 147);
+            const restW = pdf.getTextWidth(' — Fazer novo cálculo');
+            const totalW = soloW + forteW + restW;
+            const startX = (pageWidth - totalW) / 2;
+            
+            pdf.setTextColor(29, 29, 31);
+            pdf.text('Solo', startX, linkY);
+            pdf.setTextColor(52, 199, 89);
+            pdf.text('Forte', startX + soloW, linkY);
+            pdf.setTextColor(142, 142, 147);
+            pdf.text(' — Fazer novo cálculo', startX + soloW + forteW, linkY);
+            
+            pdf.link(startX, linkY - 4, totalW, 6, { url: linkUrl });
+            
+            pdfBlob = pdf.output('blob');
+            pdfFileName = `estimativa-soja-${new Date().toISOString().slice(0,10)}.pdf`;
+            
+            return true;
+            
+        } catch (err) {
+            console.error('Erro:', err);
+            return false;
+        } finally {
             document.querySelectorAll('.add-btn, .del').forEach(el => el.style.visibility = '');
             fabs.style.display = 'flex';
             loading.classList.remove('show');
             details.classList.remove('show');
         }
-    </script>
+    }
+    
+    async function exportAndShare(action) {
+        hideModal();
+        
+        document.getElementById('loadingText').textContent = 'Gerando PDF...';
+        
+        const success = await generatePDF();
+        
+        if (!success || !pdfBlob) {
+            alert('Erro ao gerar PDF. Tente novamente.');
+            return;
+        }
+        
+        if (action === 'download') {
+            // Download direto
+            const url = URL.createObjectURL(pdfBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = pdfFileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+        } else if (action === 'whatsapp') {
+            // Tentar Web Share API primeiro
+            try {
+                const file = new File([pdfBlob], pdfFileName, { type: 'application/pdf' });
+                
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({
+                        files: [file],
+                        title: 'Estimativa Soja'
+                    });
+                } else {
+                    // Fallback: download e instrução
+                    const url = URL.createObjectURL(pdfBlob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = pdfFileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    setTimeout(() => {
+                        alert('PDF salvo! Abra o WhatsApp e anexe o arquivo da pasta Downloads.');
+                    }, 500);
+                }
+            } catch (err) {
+                // Se usuário cancelou ou erro, fazer download
+                if (err.name !== 'AbortError') {
+                    const url = URL.createObjectURL(pdfBlob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = pdfFileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }
+            }
+        }
+    }
+</script>
+```
+
 </body>
 </html>
