@@ -16,7 +16,6 @@
             --text: #1D1D1F;
             --text2: #8E8E93;
             --text3: #C7C7CC;
-            --border: #E5E5EA;
             --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
         }
         
@@ -25,48 +24,48 @@
         
         .header {
             background: linear-gradient(180deg, var(--green-dark), #14332B);
-            padding: 10px 16px;
+            padding: 8px 12px;
             text-align: center;
         }
-        .header h1 { color: #FFF; font-size: 0.85rem; font-weight: 600; }
+        .header h1 { color: #FFF; font-size: 0.8rem; font-weight: 600; }
         
-        .container { max-width: 380px; margin: 0 auto; padding: 6px 8px 70px; }
+        .container { max-width: 360px; margin: 0 auto; padding: 4px 6px 60px; }
         
         .card {
             background: var(--card);
-            border-radius: 10px;
-            margin-bottom: 6px;
+            border-radius: 8px;
+            margin-bottom: 4px;
         }
         
         .card-head {
-            padding: 6px 10px 4px;
-            font-size: 0.55rem;
+            padding: 4px 8px 2px;
+            font-size: 0.5rem;
             font-weight: 600;
             color: var(--text2);
             text-transform: uppercase;
         }
         
-        .card-body { padding: 4px 10px 8px; }
+        .card-body { padding: 2px 8px 6px; }
         
         /* Aviso */
         .aviso {
             background: #FFFBEB;
-            border-left: 3px solid #F59E0B;
-            border-radius: 0 8px 8px 0;
-            padding: 6px 8px;
-            margin-bottom: 6px;
+            border-left: 2px solid #F59E0B;
+            border-radius: 0 6px 6px 0;
+            padding: 4px 6px;
+            margin-bottom: 4px;
         }
-        .aviso-title { font-size: 0.65rem; font-weight: 600; color: #B45309; }
-        .aviso-text { font-size: 0.5rem; color: #92400E; line-height: 1.3; margin-top: 2px; }
+        .aviso-title { font-size: 0.55rem; font-weight: 600; color: #B45309; }
+        .aviso-text { font-size: 0.45rem; color: #92400E; line-height: 1.2; }
         
         /* Fields */
-        .row { display: flex; gap: 6px; margin-bottom: 4px; }
+        .row { display: flex; gap: 4px; margin-bottom: 3px; }
         .row:last-child { margin-bottom: 0; }
         .col { flex: 1; min-width: 0; }
         
         label {
             display: block;
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             color: var(--text2);
             margin-bottom: 1px;
             text-transform: uppercase;
@@ -74,21 +73,21 @@
         
         input, textarea {
             width: 100%;
-            height: 28px;
+            height: 24px;
             background: var(--bg);
             border: none;
-            border-radius: 6px;
-            padding: 0 6px;
-            font-size: 0.75rem;
+            border-radius: 4px;
+            padding: 0 4px;
+            font-size: 0.7rem;
             font-family: var(--font);
             color: var(--text);
         }
         
         textarea {
-            height: 44px;
-            padding: 6px;
+            height: 32px;
+            padding: 4px;
             resize: none;
-            line-height: 1.3;
+            line-height: 1.2;
         }
         
         input:focus, textarea:focus { outline: 2px solid var(--green); outline-offset: -2px; }
@@ -98,13 +97,13 @@
         .unit { position: relative; }
         .unit span {
             position: absolute;
-            right: 6px;
+            right: 4px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             color: var(--text3);
         }
-        .unit input { padding-right: 16px; }
+        .unit input { padding-right: 14px; }
         
         .calc-field input {
             background: var(--green-light);
@@ -122,21 +121,18 @@
         /* Metric com foto */
         .metric {
             display: flex;
-            gap: 6px;
-            margin-bottom: 6px;
+            gap: 4px;
+            margin-bottom: 4px;
         }
         .metric:last-child { margin-bottom: 0; }
         
-        .photo-col {
-            width: 70px;
-            flex-shrink: 0;
-        }
-        .photo-col.empty { width: 22px; }
+        .photo-col { width: 50px; flex-shrink: 0; }
+        .photo-col.empty { width: 18px; }
         
         .photo-box {
-            width: 70px;
-            height: 70px;
-            border-radius: 6px;
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
             overflow: hidden;
             background: var(--bg);
             position: relative;
@@ -144,130 +140,129 @@
         .photo-box img { width: 100%; height: 100%; object-fit: cover; }
         .photo-box .del {
             position: absolute;
-            top: 2px;
-            right: 2px;
-            width: 16px;
-            height: 16px;
+            top: 1px;
+            right: 1px;
+            width: 14px;
+            height: 14px;
             background: rgba(0,0,0,0.5);
             border: none;
             border-radius: 50%;
             color: #FFF;
-            font-size: 10px;
+            font-size: 9px;
             cursor: pointer;
+            line-height: 1;
         }
         
-        .photo-note {
-            margin-top: 3px;
-        }
+        .photo-note { margin-top: 2px; }
         .photo-note input {
-            height: 20px;
-            font-size: 0.55rem;
-            padding: 0 4px;
+            height: 16px;
+            font-size: 0.45rem;
+            padding: 0 3px;
         }
         
         .add-btn {
-            width: 22px;
-            height: 22px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             background: var(--bg);
             border: none;
             color: var(--text3);
-            font-size: 12px;
+            font-size: 10px;
             cursor: pointer;
         }
         .add-btn:hover { background: var(--green-light); color: var(--green); }
         
-        .fields-col { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+        .fields-col { flex: 1; display: flex; flex-direction: column; gap: 2px; }
         
         /* Resultado */
         .result {
             background: linear-gradient(180deg, var(--green-dark), #14332B);
-            border-radius: 10px;
-            padding: 8px;
-            margin-bottom: 6px;
+            border-radius: 8px;
+            padding: 6px;
+            margin-bottom: 4px;
         }
         
         .result-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 4px;
+            gap: 3px;
         }
         
         .result-item {
             background: rgba(255,255,255,0.08);
-            border-radius: 6px;
-            padding: 6px 4px;
+            border-radius: 4px;
+            padding: 4px 2px;
             text-align: center;
         }
         
         .result-main {
             grid-column: 1 / -1;
             background: var(--green);
-            margin-top: 4px;
+            margin-top: 3px;
         }
         
         .result-item small {
             display: block;
-            font-size: 0.45rem;
+            font-size: 0.4rem;
             color: rgba(255,255,255,0.6);
             text-transform: uppercase;
         }
-        .result-item .val { font-size: 0.8rem; font-weight: 700; color: #FFF; }
-        .result-main .val { font-size: 1.1rem; }
-        .result-item .un { font-size: 0.4rem; color: rgba(255,255,255,0.5); }
+        .result-item .val { font-size: 0.7rem; font-weight: 700; color: #FFF; }
+        .result-main .val { font-size: 1rem; }
+        .result-item .un { font-size: 0.35rem; color: rgba(255,255,255,0.5); }
         
         .toggle {
             background: none;
             border: none;
             color: rgba(255,255,255,0.4);
-            font-size: 0.45rem;
+            font-size: 0.4rem;
             cursor: pointer;
-            margin-top: 4px;
+            margin-top: 3px;
         }
         
         .details {
             display: none;
-            margin-top: 4px;
-            padding-top: 4px;
+            margin-top: 3px;
+            padding-top: 3px;
             border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.45rem;
+            font-size: 0.4rem;
         }
         .details.show { display: block; }
-        .details div { display: flex; justify-content: space-between; padding: 1px 0; color: rgba(255,255,255,0.5); }
+        .details div { display: flex; justify-content: space-between; color: rgba(255,255,255,0.5); }
         .details span:last-child { color: rgba(255,255,255,0.8); }
         
         /* Footer */
         .footer {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             background: var(--card);
-            border-radius: 10px;
-            padding: 6px 8px;
-            margin-bottom: 6px;
+            border-radius: 8px;
+            padding: 4px 6px;
+            margin-bottom: 4px;
         }
         
         .footer-logo {
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
             background: var(--bg);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             overflow: hidden;
-            font-size: 0.4rem;
+            font-size: 0.35rem;
             color: var(--text3);
         }
         .footer-logo img { width: 100%; height: 100%; object-fit: contain; }
         .footer-info { flex: 1; }
-        .footer-info input { height: 20px; font-size: 0.6rem; margin-bottom: 2px; }
+        .footer-info input { height: 18px; font-size: 0.55rem; margin-bottom: 2px; }
         
         .branding {
             text-align: center;
-            padding: 6px;
-            font-size: 0.5rem;
+            padding: 4px;
+            font-size: 0.45rem;
         }
         .branding a { text-decoration: none; color: var(--text2); }
         .brand-solo { color: var(--text); font-weight: 600; }
@@ -276,14 +271,14 @@
         /* FABs */
         .fabs {
             position: fixed;
-            bottom: 12px;
-            right: 8px;
+            bottom: 10px;
+            right: 6px;
             display: flex;
             gap: 6px;
         }
         .fab {
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             border: none;
             display: flex;
@@ -296,23 +291,37 @@
         .fab-w svg { width: 14px; height: 14px; fill: var(--text2); }
         .fab-g { background: var(--green); }
         .fab-g svg { width: 14px; height: 14px; fill: #FFF; }
+        .fab-wpp { background: #25D366; }
+        .fab-wpp svg { width: 14px; height: 14px; fill: #FFF; }
         
-        /* PDF Mode */
-        .pdf-ready {
-            background: #FFF !important;
+        /* Loading */
+        .loading {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
         }
-        .pdf-ready .container {
-            max-width: 100% !important;
-            padding: 0 !important;
+        .loading.show { display: flex; }
+        .loading-box {
+            background: #FFF;
+            padding: 20px 30px;
+            border-radius: 12px;
+            text-align: center;
         }
-        .pdf-ready .fabs,
-        .pdf-ready .add-btn,
-        .pdf-ready .photo-box .del {
-            display: none !important;
+        .loading-box p { font-size: 0.75rem; color: var(--text); margin-top: 8px; }
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--bg);
+            border-top-color: var(--green);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
         }
-        .pdf-ready .details {
-            display: block !important;
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
         
         @media print {
             .fabs, .add-btn, .photo-box .del { display: none !important; }
@@ -326,32 +335,29 @@
     </header>
     
     <main class="container" id="content">
-        <!-- Aviso -->
         <div class="aviso">
             <div class="aviso-title">📌 Expectativa de Produção (Estimativa Técnica)</div>
-            <div class="aviso-text">📢 Os números apresentados abaixo são projeções técnicas e não garantem resultados absolutos, estando sujeitos a variações devido a fatores climáticos, de manejo e outros aspectos de campo.</div>
+            <div class="aviso-text">📢 Os números são projeções técnicas e não garantem resultados absolutos, sujeitos a variações climáticas, de manejo e campo.</div>
         </div>
         
-        <!-- Identificação -->
         <section class="card">
             <div class="card-head">Identificação</div>
             <div class="card-body">
                 <div class="row">
                     <div class="col"><label>Produtor</label><input type="text" id="produtor" placeholder="—"></div>
-                </div>
-                <div class="row">
                     <div class="col"><label>Fazenda</label><input type="text" id="fazenda" placeholder="—"></div>
-                    <div class="col"><label>Cidade/UF</label><input type="text" id="cidade" placeholder="—"></div>
                 </div>
                 <div class="row">
+                    <div class="col"><label>Cidade/UF</label><input type="text" id="cidade" placeholder="—"></div>
                     <div class="col"><label>Cultivar</label><input type="text" id="cultivar" placeholder="—"></div>
+                </div>
+                <div class="row">
                     <div class="col unit"><label>Área</label><input type="number" id="area" placeholder="—" step="0.1"><span>ha</span></div>
                     <div class="col"><label>Data</label><input type="date" id="data"></div>
                 </div>
             </div>
         </section>
         
-        <!-- População -->
         <section class="card">
             <div class="card-head">População</div>
             <div class="card-body">
@@ -372,11 +378,9 @@
             </div>
         </section>
         
-        <!-- Componentes -->
         <section class="card">
             <div class="card-head">Componentes de Rendimento</div>
             <div class="card-body">
-                <!-- Plantas -->
                 <div class="metric" id="metricPlantas">
                     <div class="photo-col empty" id="photoPlantas">
                         <button class="add-btn" onclick="addPhoto('plantas')">+</button>
@@ -393,7 +397,6 @@
                     </div>
                 </div>
                 
-                <!-- PMG -->
                 <div class="metric" id="metricPmg">
                     <div class="photo-col empty" id="photoPmg">
                         <button class="add-btn" onclick="addPhoto('pmg')">+</button>
@@ -406,7 +409,6 @@
                     </div>
                 </div>
                 
-                <!-- Entrenós -->
                 <div class="metric" id="metricEntrenos">
                     <div class="photo-col empty" id="photoEntrenos">
                         <button class="add-btn" onclick="addPhoto('entrenos')">+</button>
@@ -421,15 +423,13 @@
             </div>
         </section>
         
-        <!-- Anotação Geral -->
         <section class="card">
             <div class="card-head">Observações</div>
             <div class="card-body">
-                <textarea id="anotacaoGeral" placeholder="Anotações gerais, detalhes da avaliação..."></textarea>
+                <textarea id="anotacaoGeral" placeholder="Anotações gerais..."></textarea>
             </div>
         </section>
         
-        <!-- Resultado -->
         <section class="result">
             <div class="result-grid">
                 <div class="result-item"><small>kg/ha</small><div class="val" id="rKg">—</div></div>
@@ -437,17 +437,16 @@
                 <div class="result-item"><small>Líquido</small><div class="val" id="rLiqItem">—</div><div class="un">sc/ha</div></div>
                 <div class="result-item result-main"><small>Produção Estimada</small><div class="val" id="rLiquido">—</div><div class="un">sacas/ha</div></div>
             </div>
-            <button class="toggle" onclick="this.classList.toggle('open');document.getElementById('details').classList.toggle('show')">▼ Detalhes</button>
+            <button class="toggle" onclick="toggleDetails()">▼ Detalhes</button>
             <div class="details" id="details">
-                <div><span>Vagens × Grãos</span><span id="d1">—</span></div>
-                <div><span>× PMG/1000</span><span id="d2">—</span></div>
-                <div><span>× Plantas/ha</span><span id="d3">—</span></div>
-                <div><span>÷ 1000 ÷ 60</span><span id="d4">—</span></div>
-                <div><span>- Perdas</span><span id="d5">—</span></div>
+                <div><span>Grãos/pl</span><span id="d1">—</span></div>
+                <div><span>g/pl</span><span id="d2">—</span></div>
+                <div><span>kg/ha</span><span id="d3">—</span></div>
+                <div><span>Bruto</span><span id="d4">—</span></div>
+                <div><span>Líquido</span><span id="d5">—</span></div>
             </div>
         </section>
         
-        <!-- Footer -->
         <section class="footer">
             <div class="footer-logo" onclick="document.getElementById('logoInput').click()" id="logoBox">Logo</div>
             <div class="footer-info">
@@ -465,8 +464,16 @@
     </main>
     
     <div class="fabs">
-        <button class="fab fab-w" onclick="limpar()"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg></button>
+        <button class="fab fab-w" onclick="limpar()"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+        <button class="fab fab-wpp" onclick="shareWhatsApp()" title="Compartilhar WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button>
         <button class="fab fab-g" onclick="exportPDF()" title="Exportar PDF"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></button>
+    </div>
+    
+    <div class="loading" id="loading">
+        <div class="loading-box">
+            <div class="spinner"></div>
+            <p>Gerando PDF...</p>
+        </div>
     </div>
     
     <input type="file" id="fileInput" accept="image/*" hidden>
@@ -544,13 +551,17 @@
             document.getElementById('rLiqItem').textContent = scL.toFixed(1);
             document.getElementById('rLiquido').textContent = scL.toFixed(2);
             
-            document.getElementById('d1').textContent = `${v} × ${g} = ${graosPl.toFixed(1)}`;
-            document.getElementById('d2').textContent = `${gramasPl.toFixed(2)} g/pl`;
-            document.getElementById('d3').textContent = `${(plantasHa * gramasPl / 1000).toFixed(0)} kg`;
-            document.getElementById('d4').textContent = `${scB.toFixed(2)} sc`;
-            document.getElementById('d5').textContent = `${scL.toFixed(2)} sc (-${p}%)`;
+            document.getElementById('d1').textContent = `${v}×${g}=${graosPl.toFixed(1)}`;
+            document.getElementById('d2').textContent = `${gramasPl.toFixed(2)}g`;
+            document.getElementById('d3').textContent = `${kgHa.toFixed(0)}`;
+            document.getElementById('d4').textContent = `${scB.toFixed(2)}sc`;
+            document.getElementById('d5').textContent = `${scL.toFixed(2)}sc`;
             
             saveData();
+        }
+        
+        function toggleDetails() {
+            document.getElementById('details').classList.toggle('show');
         }
         
         fields.forEach(id => {
@@ -572,7 +583,7 @@
                             <button class="del" onclick="delPhoto('${key}')">×</button>
                         </div>
                         <div class="photo-note">
-                            <input placeholder="Anotação" value="${photos[key].note||''}" oninput="saveNote('${key}',this.value)">
+                            <input placeholder="Nota" value="${photos[key].note||''}" oninput="saveNote('${key}',this.value)">
                         </div>
                     `;
                 } else {
@@ -590,7 +601,7 @@
         document.getElementById('fileInput').addEventListener('change', async e => {
             const f = e.target.files[0];
             if (!f || !currentKey) return;
-            photos[currentKey] = { src: await compress(f, 500, 0.6), note: '' };
+            photos[currentKey] = { src: await compress(f, 400, 0.5), note: '' };
             localStorage.setItem('soja_photos', JSON.stringify(photos));
             renderPhotos();
             e.target.value = '';
@@ -617,7 +628,7 @@
         document.getElementById('logoInput').addEventListener('change', async e => {
             const f = e.target.files[0];
             if (!f) return;
-            logo = await compress(f, 80, 0.5);
+            logo = await compress(f, 60, 0.4);
             localStorage.setItem('soja_logo', logo);
             renderLogo();
             e.target.value = '';
@@ -652,45 +663,144 @@
             }
         }
         
-        function exportPDF() {
-            // Preparar
-            document.body.classList.add('pdf-ready');
+        // Gerar texto resumo
+        function getResumo() {
+            const prod = document.getElementById('produtor').value || '—';
+            const faz = document.getElementById('fazenda').value || '—';
+            const cid = document.getElementById('cidade').value || '—';
+            const cult = document.getElementById('cultivar').value || '—';
+            const area = document.getElementById('area').value || '—';
+            const liquido = document.getElementById('rLiquido').textContent;
+            const bruto = document.getElementById('rBruto').textContent;
+            const kg = document.getElementById('rKg').textContent;
+            
+            return `🌱 *ESTIMATIVA DE PRODUÇÃO - SOJA*
+
+📋 *Identificação*
+Produtor: ${prod}
+Fazenda: ${faz}
+Local: ${cid}
+Cultivar: ${cult}
+Área: ${area} ha
+
+📊 *Resultado*
+${kg} kg/ha
+${bruto} sc/ha (bruto)
+*${liquido} sc/ha (líquido)*
+
+📌 _Estimativa técnica sujeita a variações_
+
+🔗 Calcule: https://afonsoraudinei.github.io/Calculadorasoja/`;
+        }
+        
+        // WhatsApp
+        function shareWhatsApp() {
+            const texto = encodeURIComponent(getResumo());
+            window.open(`https://wa.me/?text=${texto}`, '_blank');
+        }
+        
+        // PDF
+        async function exportPDF() {
+            document.getElementById('loading').classList.add('show');
             document.getElementById('details').classList.add('show');
+            
+            // Esconder botões
+            document.querySelectorAll('.fabs, .add-btn, .del').forEach(el => el.style.display = 'none');
             
             const content = document.getElementById('content');
             
-            html2pdf().set({
-                margin: 5,
-                filename: 'estimativa-soja.pdf',
-                image: { type: 'jpeg', quality: 0.9 },
-                html2canvas: { 
-                    scale: 1.5,
+            try {
+                const canvas = await html2canvas(content, {
+                    scale: 2,
                     useCORS: true,
-                    width: 380,
-                    windowWidth: 380,
-                    scrollY: 0,
-                    scrollX: 0
-                },
-                jsPDF: { 
-                    unit: 'mm', 
-                    format: 'a4', 
-                    orientation: 'portrait'
+                    width: 360,
+                    windowWidth: 360,
+                    backgroundColor: '#F2F2F7'
+                });
+                
+                const imgData = canvas.toDataURL('image/jpeg', 0.9);
+                
+                // Criar PDF A4
+                const { jsPDF } = window.jspdf || await loadJsPDF();
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                
+                const pageWidth = 210;
+                const pageHeight = 297;
+                const margin = 10;
+                const contentWidth = pageWidth - (margin * 2);
+                
+                // Calcular altura proporcional
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = contentWidth / imgWidth;
+                const scaledHeight = imgHeight * ratio;
+                
+                // Se maior que página, reduzir
+                let finalWidth = contentWidth;
+                let finalHeight = scaledHeight;
+                
+                if (finalHeight > pageHeight - (margin * 2)) {
+                    const scale = (pageHeight - (margin * 2)) / finalHeight;
+                    finalHeight = pageHeight - (margin * 2);
+                    finalWidth = contentWidth * scale;
                 }
-            }).from(content).toPdf().get('pdf').then(pdf => {
+                
+                const x = (pageWidth - finalWidth) / 2;
+                const y = margin;
+                
+                pdf.addImage(imgData, 'JPEG', x, y, finalWidth, finalHeight);
+                
                 // Link no rodapé
-                const w = pdf.internal.pageSize.getWidth();
-                const h = pdf.internal.pageSize.getHeight();
                 pdf.setFontSize(7);
                 pdf.setTextColor(52, 199, 89);
-                pdf.textWithLink('SoloForte - Fazer novo calculo', w/2, h - 3, {
+                pdf.textWithLink('SoloForte - Fazer novo calculo', pageWidth / 2, pageHeight - 5, {
                     url: 'https://afonsoraudinei.github.io/Calculadorasoja/',
                     align: 'center'
                 });
-            }).save().then(() => {
-                document.body.classList.remove('pdf-ready');
-                document.getElementById('details').classList.remove('show');
+                
+                // Salvar como blob e compartilhar
+                const pdfBlob = pdf.output('blob');
+                const file = new File([pdfBlob], 'estimativa-soja.pdf', { type: 'application/pdf' });
+                
+                // Tentar usar Web Share API (mobile)
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({
+                        files: [file],
+                        title: 'Estimativa de Produção - Soja',
+                        text: 'Segue estimativa de produção'
+                    });
+                } else {
+                    // Fallback: download normal
+                    pdf.save('estimativa-soja.pdf');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Erro ao gerar PDF');
+            }
+            
+            // Restaurar
+            document.querySelectorAll('.fabs, .add-btn, .del').forEach(el => el.style.display = '');
+            document.getElementById('loading').classList.remove('show');
+            document.getElementById('details').classList.remove('show');
+        }
+        
+        // Carregar jsPDF dinamicamente
+        function loadJsPDF() {
+            return new Promise((resolve) => {
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+                script.onload = () => resolve(window.jspdf);
+                document.head.appendChild(script);
             });
         }
+        
+        // Carregar html2canvas se não existir
+        if (typeof html2canvas === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+            document.head.appendChild(script);
+        }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
