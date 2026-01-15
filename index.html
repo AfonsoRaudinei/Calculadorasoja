@@ -30,35 +30,12 @@
         }
         .header h1 { color: #FFF; font-size: 0.85rem; font-weight: 600; }
         
-        .container { max-width: 400px; margin: 0 auto; padding: 6px 10px 70px; }
-        
-        /* Aviso */
-        .aviso {
-            background: #FFFBEB;
-            border-left: 3px solid #F59E0B;
-            border-radius: 0 8px 8px 0;
-            padding: 8px 10px;
-            margin-bottom: 6px;
-        }
-        
-        .aviso-title {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #B45309;
-            margin-bottom: 2px;
-        }
-        
-        .aviso-text {
-            font-size: 0.55rem;
-            color: #92400E;
-            line-height: 1.4;
-        }
+        .container { max-width: 380px; margin: 0 auto; padding: 6px 8px 70px; }
         
         .card {
             background: var(--card);
             border-radius: 10px;
             margin-bottom: 6px;
-            overflow: hidden;
         }
         
         .card-head {
@@ -67,78 +44,25 @@
             font-weight: 600;
             color: var(--text2);
             text-transform: uppercase;
-            letter-spacing: 0.2px;
         }
         
         .card-body { padding: 4px 10px 8px; }
         
-        .metric-block {
-            display: flex;
-            gap: 8px;
+        /* Aviso */
+        .aviso {
+            background: #FFFBEB;
+            border-left: 3px solid #F59E0B;
+            border-radius: 0 8px 8px 0;
+            padding: 6px 8px;
             margin-bottom: 6px;
         }
-        .metric-block:last-child { margin-bottom: 0; }
+        .aviso-title { font-size: 0.65rem; font-weight: 600; color: #B45309; }
+        .aviso-text { font-size: 0.5rem; color: #92400E; line-height: 1.3; margin-top: 2px; }
         
-        .photo-area {
-            width: 80px;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .photo-area.collapsed { width: 24px; }
-        
-        .photo-thumb {
-            width: 80px;
-            height: 80px;
-            border-radius: 8px;
-            overflow: hidden;
-            background: var(--bg);
-            position: relative;
-        }
-        .photo-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .photo-thumb .del {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            width: 18px;
-            height: 18px;
-            background: rgba(0,0,0,0.5);
-            border: none;
-            border-radius: 50%;
-            color: #FFF;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        
-        .photo-note { width: 80px; }
-        .photo-note input {
-            width: 100%;
-            height: 22px;
-            font-size: 0.6rem;
-            background: var(--bg);
-            border: none;
-            border-radius: 4px;
-            padding: 0 4px;
-            color: var(--text2);
-        }
-        
-        .add-photo-btn {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--bg);
-            border: none;
-            color: var(--text3);
-            font-size: 14px;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-        .add-photo-btn:hover { background: var(--green-light); color: var(--green); }
-        
-        .fields-area { flex: 1; display: flex; flex-direction: column; gap: 4px; }
-        .field-row { display: flex; gap: 6px; }
-        .field { flex: 1; min-width: 0; }
+        /* Fields */
+        .row { display: flex; gap: 6px; margin-bottom: 4px; }
+        .row:last-child { margin-bottom: 0; }
+        .col { flex: 1; min-width: 0; }
         
         label {
             display: block;
@@ -148,18 +72,26 @@
             text-transform: uppercase;
         }
         
-        input {
+        input, textarea {
             width: 100%;
             height: 28px;
             background: var(--bg);
             border: none;
             border-radius: 6px;
             padding: 0 6px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-family: var(--font);
             color: var(--text);
         }
-        input:focus { outline: 2px solid var(--green); outline-offset: -2px; }
+        
+        textarea {
+            height: 44px;
+            padding: 6px;
+            resize: none;
+            line-height: 1.3;
+        }
+        
+        input:focus, textarea:focus { outline: 2px solid var(--green); outline-offset: -2px; }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; }
         input[type=number] { -moz-appearance: textfield; }
         
@@ -187,6 +119,67 @@
             text-align: right;
         }
         
+        /* Metric com foto */
+        .metric {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+        .metric:last-child { margin-bottom: 0; }
+        
+        .photo-col {
+            width: 70px;
+            flex-shrink: 0;
+        }
+        .photo-col.empty { width: 22px; }
+        
+        .photo-box {
+            width: 70px;
+            height: 70px;
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--bg);
+            position: relative;
+        }
+        .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-box .del {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 16px;
+            height: 16px;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            border-radius: 50%;
+            color: #FFF;
+            font-size: 10px;
+            cursor: pointer;
+        }
+        
+        .photo-note {
+            margin-top: 3px;
+        }
+        .photo-note input {
+            height: 20px;
+            font-size: 0.55rem;
+            padding: 0 4px;
+        }
+        
+        .add-btn {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: none;
+            color: var(--text3);
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .add-btn:hover { background: var(--green-light); color: var(--green); }
+        
+        .fields-col { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+        
+        /* Resultado */
         .result {
             background: linear-gradient(180deg, var(--green-dark), #14332B);
             border-radius: 10px;
@@ -198,20 +191,19 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 4px;
-            margin-bottom: 4px;
         }
         
         .result-item {
             background: rgba(255,255,255,0.08);
             border-radius: 6px;
-            padding: 5px 4px;
+            padding: 6px 4px;
             text-align: center;
         }
         
         .result-main {
             grid-column: 1 / -1;
             background: var(--green);
-            padding: 8px;
+            margin-top: 4px;
         }
         
         .result-item small {
@@ -220,9 +212,8 @@
             color: rgba(255,255,255,0.6);
             text-transform: uppercase;
         }
-        
         .result-item .val { font-size: 0.8rem; font-weight: 700; color: #FFF; }
-        .result-main .val { font-size: 1.2rem; }
+        .result-main .val { font-size: 1.1rem; }
         .result-item .un { font-size: 0.4rem; color: rgba(255,255,255,0.5); }
         
         .toggle {
@@ -231,7 +222,7 @@
             color: rgba(255,255,255,0.4);
             font-size: 0.45rem;
             cursor: pointer;
-            font-family: var(--font);
+            margin-top: 4px;
         }
         
         .details {
@@ -245,19 +236,20 @@
         .details div { display: flex; justify-content: space-between; padding: 1px 0; color: rgba(255,255,255,0.5); }
         .details span:last-child { color: rgba(255,255,255,0.8); }
         
+        /* Footer */
         .footer {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: var(--card);
             border-radius: 10px;
-            padding: 8px 10px;
+            padding: 6px 8px;
             margin-bottom: 6px;
         }
         
         .footer-logo {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             border-radius: 6px;
             background: var(--bg);
             display: flex;
@@ -270,45 +262,60 @@
         }
         .footer-logo img { width: 100%; height: 100%; object-fit: contain; }
         .footer-info { flex: 1; }
-        .footer-info input { height: 22px; font-size: 0.65rem; margin-bottom: 2px; }
-        .footer-info input:last-child { margin-bottom: 0; }
+        .footer-info input { height: 20px; font-size: 0.6rem; margin-bottom: 2px; }
         
         .branding {
             text-align: center;
-            padding: 8px;
-            font-size: 0.55rem;
+            padding: 6px;
+            font-size: 0.5rem;
         }
         .branding a { text-decoration: none; color: var(--text2); }
-        .branding a:hover { color: var(--text); }
         .brand-solo { color: var(--text); font-weight: 600; }
         .brand-forte { color: var(--green); font-weight: 600; }
         
+        /* FABs */
         .fabs {
             position: fixed;
             bottom: 12px;
-            right: 10px;
+            right: 8px;
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
-        
         .fab {
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
         .fab-w { background: #FFF; }
-        .fab-w svg { width: 16px; height: 16px; fill: var(--text2); }
+        .fab-w svg { width: 14px; height: 14px; fill: var(--text2); }
         .fab-g { background: var(--green); }
-        .fab-g svg { width: 16px; height: 16px; fill: #FFF; }
+        .fab-g svg { width: 14px; height: 14px; fill: #FFF; }
+        
+        /* PDF Mode */
+        .pdf-ready {
+            background: #FFF !important;
+        }
+        .pdf-ready .container {
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+        .pdf-ready .fabs,
+        .pdf-ready .add-btn,
+        .pdf-ready .photo-box .del {
+            display: none !important;
+        }
+        .pdf-ready .details {
+            display: block !important;
+        }
         
         @media print {
-            .fabs, .add-photo-btn, .photo-thumb .del { display: none !important; }
+            .fabs, .add-btn, .photo-box .del { display: none !important; }
             .details { display: block !important; }
         }
     </style>
@@ -325,89 +332,104 @@
             <div class="aviso-text">📢 Os números apresentados abaixo são projeções técnicas e não garantem resultados absolutos, estando sujeitos a variações devido a fatores climáticos, de manejo e outros aspectos de campo.</div>
         </div>
         
+        <!-- Identificação -->
         <section class="card">
             <div class="card-head">Identificação</div>
             <div class="card-body">
-                <div class="field-row">
-                    <div class="field"><label>Produtor</label><input type="text" id="produtor" placeholder="—"></div>
+                <div class="row">
+                    <div class="col"><label>Produtor</label><input type="text" id="produtor" placeholder="—"></div>
                 </div>
-                <div class="field-row" style="margin-top:4px">
-                    <div class="field"><label>Fazenda</label><input type="text" id="fazenda" placeholder="—"></div>
-                    <div class="field"><label>Cidade/UF</label><input type="text" id="cidade" placeholder="—"></div>
+                <div class="row">
+                    <div class="col"><label>Fazenda</label><input type="text" id="fazenda" placeholder="—"></div>
+                    <div class="col"><label>Cidade/UF</label><input type="text" id="cidade" placeholder="—"></div>
                 </div>
-                <div class="field-row" style="margin-top:4px">
-                    <div class="field"><label>Cultivar</label><input type="text" id="cultivar" placeholder="—"></div>
-                    <div class="field unit"><label>Área</label><input type="number" id="area" placeholder="—" step="0.1"><span>ha</span></div>
-                    <div class="field"><label>Data</label><input type="date" id="data"></div>
+                <div class="row">
+                    <div class="col"><label>Cultivar</label><input type="text" id="cultivar" placeholder="—"></div>
+                    <div class="col unit"><label>Área</label><input type="number" id="area" placeholder="—" step="0.1"><span>ha</span></div>
+                    <div class="col"><label>Data</label><input type="date" id="data"></div>
                 </div>
             </div>
         </section>
         
+        <!-- População -->
         <section class="card">
             <div class="card-head">População</div>
             <div class="card-body">
-                <div class="metric-block" id="blockLavoura">
-                    <div class="photo-area collapsed" id="photoLavoura">
-                        <button class="add-photo-btn" onclick="addPhoto('lavoura')">+</button>
+                <div class="metric" id="metricLavoura">
+                    <div class="photo-col empty" id="photoLavoura">
+                        <button class="add-btn" onclick="addPhoto('lavoura')">+</button>
                     </div>
-                    <div class="fields-area">
-                        <div class="field-row">
-                            <div class="field"><label>Plantas/Metro</label><input type="number" id="plantasMetro" placeholder="—" step="0.1"></div>
-                            <div class="field unit"><label>Espaçamento</label><input type="number" id="espacamento" value="0.5" step="0.05"><span>m</span></div>
+                    <div class="fields-col">
+                        <div class="row">
+                            <div class="col"><label>Plantas/Metro</label><input type="number" id="plantasMetro" placeholder="—" step="0.1"></div>
+                            <div class="col unit"><label>Espaçamento</label><input type="number" id="espacamento" value="0.5" step="0.05"><span>m</span></div>
                         </div>
-                        <div class="field-row">
-                            <div class="field calc-field"><label>Plantas/ha</label><input type="text" id="plantasHa" readonly></div>
+                        <div class="row">
+                            <div class="col calc-field"><label>Plantas/ha</label><input type="text" id="plantasHa" readonly></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         
+        <!-- Componentes -->
         <section class="card">
             <div class="card-head">Componentes de Rendimento</div>
             <div class="card-body">
-                <div class="metric-block" id="blockPlantas">
-                    <div class="photo-area collapsed" id="photoPlantas">
-                        <button class="add-photo-btn" onclick="addPhoto('plantas')">+</button>
+                <!-- Plantas -->
+                <div class="metric" id="metricPlantas">
+                    <div class="photo-col empty" id="photoPlantas">
+                        <button class="add-btn" onclick="addPhoto('plantas')">+</button>
                     </div>
-                    <div class="fields-area">
-                        <div class="field-row">
-                            <div class="field"><label>Plantas Aval.</label><input type="number" id="plantasAval" value="3" min="1"></div>
-                            <div class="field"><label>Vagens/Pl</label><input type="number" id="vagens" placeholder="—" step="0.1"></div>
+                    <div class="fields-col">
+                        <div class="row">
+                            <div class="col"><label>Plantas Aval.</label><input type="number" id="plantasAval" value="3" min="1"></div>
+                            <div class="col"><label>Vagens/Pl</label><input type="number" id="vagens" placeholder="—" step="0.1"></div>
                         </div>
-                        <div class="field-row">
-                            <div class="field"><label>Grãos/Vagem</label><input type="number" id="graos" placeholder="—" step="0.1"></div>
-                            <div class="field result-field"><label>Grãos/Pl</label><input type="text" id="rGraosPl" readonly></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="metric-block" id="blockPmg">
-                    <div class="photo-area collapsed" id="photoPmg">
-                        <button class="add-photo-btn" onclick="addPhoto('pmg')">+</button>
-                    </div>
-                    <div class="fields-area">
-                        <div class="field-row">
-                            <div class="field unit"><label>PMG</label><input type="number" id="pmg" placeholder="—" step="0.1"><span>g</span></div>
-                            <div class="field result-field"><label>g/Planta</label><input type="text" id="rGramasPl" readonly></div>
+                        <div class="row">
+                            <div class="col"><label>Grãos/Vagem</label><input type="number" id="graos" placeholder="—" step="0.1"></div>
+                            <div class="col result-field"><label>Grãos/Pl</label><input type="text" id="rGraosPl" readonly></div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="metric-block" id="blockEntrenos">
-                    <div class="photo-area collapsed" id="photoEntrenos">
-                        <button class="add-photo-btn" onclick="addPhoto('entrenos')">+</button>
+                <!-- PMG -->
+                <div class="metric" id="metricPmg">
+                    <div class="photo-col empty" id="photoPmg">
+                        <button class="add-btn" onclick="addPhoto('pmg')">+</button>
                     </div>
-                    <div class="fields-area">
-                        <div class="field-row">
-                            <div class="field"><label>Entrenós/Planta</label><input type="number" id="entrenos" placeholder="—"></div>
-                            <div class="field unit"><label>Perdas</label><input type="number" id="perdas" value="20"><span>%</span></div>
+                    <div class="fields-col">
+                        <div class="row">
+                            <div class="col unit"><label>PMG</label><input type="number" id="pmg" placeholder="—" step="0.1"><span>g</span></div>
+                            <div class="col result-field"><label>g/Planta</label><input type="text" id="rGramasPl" readonly></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Entrenós -->
+                <div class="metric" id="metricEntrenos">
+                    <div class="photo-col empty" id="photoEntrenos">
+                        <button class="add-btn" onclick="addPhoto('entrenos')">+</button>
+                    </div>
+                    <div class="fields-col">
+                        <div class="row">
+                            <div class="col"><label>Entrenós/Pl</label><input type="number" id="entrenos" placeholder="—"></div>
+                            <div class="col unit"><label>Perdas</label><input type="number" id="perdas" value="20"><span>%</span></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         
+        <!-- Anotação Geral -->
+        <section class="card">
+            <div class="card-head">Observações</div>
+            <div class="card-body">
+                <textarea id="anotacaoGeral" placeholder="Anotações gerais, detalhes da avaliação..."></textarea>
+            </div>
+        </section>
+        
+        <!-- Resultado -->
         <section class="result">
             <div class="result-grid">
                 <div class="result-item"><small>kg/ha</small><div class="val" id="rKg">—</div></div>
@@ -418,13 +440,14 @@
             <button class="toggle" onclick="this.classList.toggle('open');document.getElementById('details').classList.toggle('show')">▼ Detalhes</button>
             <div class="details" id="details">
                 <div><span>Vagens × Grãos</span><span id="d1">—</span></div>
-                <div><span>Grãos/pl × PMG/1000</span><span id="d2">—</span></div>
-                <div><span>g/pl × Plantas/ha</span><span id="d3">—</span></div>
+                <div><span>× PMG/1000</span><span id="d2">—</span></div>
+                <div><span>× Plantas/ha</span><span id="d3">—</span></div>
                 <div><span>÷ 1000 ÷ 60</span><span id="d4">—</span></div>
                 <div><span>- Perdas</span><span id="d5">—</span></div>
             </div>
         </section>
         
+        <!-- Footer -->
         <section class="footer">
             <div class="footer-logo" onclick="document.getElementById('logoInput').click()" id="logoBox">Logo</div>
             <div class="footer-info">
@@ -434,7 +457,7 @@
         </section>
         
         <div class="branding">
-            <a href="https://afonsoraudinei.github.io/Calculadorasoja/" target="_blank" id="brandingLink">
+            <a href="https://afonsoraudinei.github.io/Calculadorasoja/" target="_blank">
                 <span class="brand-solo">Solo</span><span class="brand-forte">Forte</span>
                 <span> — Fazer novo cálculo</span>
             </a>
@@ -452,14 +475,14 @@
     <script>
         let photos = JSON.parse(localStorage.getItem('soja_photos')) || {};
         let logo = localStorage.getItem('soja_logo') || null;
-        let currentPhotoKey = null;
+        let currentKey = null;
         
-        const fields = ['produtor','fazenda','cidade','cultivar','area','data','plantasMetro','espacamento','plantasAval','vagens','graos','pmg','entrenos','perdas','editorNome','editorContato'];
+        const fields = ['produtor','fazenda','cidade','cultivar','area','data','plantasMetro','espacamento','plantasAval','vagens','graos','pmg','entrenos','perdas','editorNome','editorContato','anotacaoGeral'];
         const photoKeys = ['lavoura','plantas','pmg','entrenos'];
         
         document.addEventListener('DOMContentLoaded', () => {
             loadData();
-            renderAllPhotos();
+            renderPhotos();
             renderLogo();
             calc();
             if (!document.getElementById('data').value) document.getElementById('data').valueAsDate = new Date();
@@ -467,12 +490,18 @@
         
         function loadData() {
             const d = JSON.parse(localStorage.getItem('soja_data')) || {};
-            fields.forEach(id => { const el = document.getElementById(id); if (el && d[id]) el.value = d[id]; });
+            fields.forEach(id => { 
+                const el = document.getElementById(id); 
+                if (el && d[id]) el.value = d[id]; 
+            });
         }
         
         function saveData() {
             const d = {};
-            fields.forEach(id => { const el = document.getElementById(id); if (el) d[id] = el.value; });
+            fields.forEach(id => { 
+                const el = document.getElementById(id); 
+                if (el) d[id] = el.value; 
+            });
             localStorage.setItem('soja_data', JSON.stringify(d));
         }
         
@@ -515,11 +544,11 @@
             document.getElementById('rLiqItem').textContent = scL.toFixed(1);
             document.getElementById('rLiquido').textContent = scL.toFixed(2);
             
-            document.getElementById('d1').textContent = `${v} × ${g} = ${graosPl.toFixed(1)} gr/pl`;
-            document.getElementById('d2').textContent = `${graosPl.toFixed(1)} × ${(pmg/1000).toFixed(3)} = ${gramasPl.toFixed(2)} g/pl`;
-            document.getElementById('d3').textContent = `${(plantasHa * gramasPl).toFixed(0)} g/ha`;
-            document.getElementById('d4').textContent = `${kgHa.toFixed(0)} kg → ${scB.toFixed(2)} sc`;
-            document.getElementById('d5').textContent = `${scL.toFixed(2)} sc/ha (-${p}%)`;
+            document.getElementById('d1').textContent = `${v} × ${g} = ${graosPl.toFixed(1)}`;
+            document.getElementById('d2').textContent = `${gramasPl.toFixed(2)} g/pl`;
+            document.getElementById('d3').textContent = `${(plantasHa * gramasPl / 1000).toFixed(0)} kg`;
+            document.getElementById('d4').textContent = `${scB.toFixed(2)} sc`;
+            document.getElementById('d5').textContent = `${scL.toFixed(2)} sc (-${p}%)`;
             
             saveData();
         }
@@ -529,60 +558,58 @@
             if (el) el.addEventListener('input', () => { calc(); saveData(); });
         });
         
-        function renderAllPhotos() {
-            photoKeys.forEach(key => renderPhoto(key));
-        }
-        
-        function renderPhoto(key) {
-            const container = document.getElementById(`photo${key.charAt(0).toUpperCase() + key.slice(1)}`);
-            if (!container) return;
-            
-            if (photos[key]?.src) {
-                container.classList.remove('collapsed');
-                container.innerHTML = `
-                    <div class="photo-thumb">
-                        <img src="${photos[key].src}">
-                        <button class="del" onclick="deletePhoto('${key}')">×</button>
-                    </div>
-                    <div class="photo-note">
-                        <input type="text" id="note_${key}" placeholder="Anotação" value="${photos[key].note || ''}" oninput="updateNote('${key}', this.value)">
-                    </div>
-                `;
-            } else {
-                container.classList.add('collapsed');
-                container.innerHTML = `<button class="add-photo-btn" onclick="addPhoto('${key}')">+</button>`;
-            }
+        // Fotos
+        function renderPhotos() {
+            photoKeys.forEach(key => {
+                const col = document.getElementById(`photo${key.charAt(0).toUpperCase() + key.slice(1)}`);
+                if (!col) return;
+                
+                if (photos[key]?.src) {
+                    col.classList.remove('empty');
+                    col.innerHTML = `
+                        <div class="photo-box">
+                            <img src="${photos[key].src}">
+                            <button class="del" onclick="delPhoto('${key}')">×</button>
+                        </div>
+                        <div class="photo-note">
+                            <input placeholder="Anotação" value="${photos[key].note||''}" oninput="saveNote('${key}',this.value)">
+                        </div>
+                    `;
+                } else {
+                    col.classList.add('empty');
+                    col.innerHTML = `<button class="add-btn" onclick="addPhoto('${key}')">+</button>`;
+                }
+            });
         }
         
         function addPhoto(key) {
-            currentPhotoKey = key;
+            currentKey = key;
             document.getElementById('fileInput').click();
         }
         
         document.getElementById('fileInput').addEventListener('change', async e => {
             const f = e.target.files[0];
-            if (!f || !currentPhotoKey) return;
-            const src = await compress(f, 600, 0.7);
-            photos[currentPhotoKey] = { src, note: '' };
+            if (!f || !currentKey) return;
+            photos[currentKey] = { src: await compress(f, 500, 0.6), note: '' };
             localStorage.setItem('soja_photos', JSON.stringify(photos));
-            renderPhoto(currentPhotoKey);
-            currentPhotoKey = null;
+            renderPhotos();
             e.target.value = '';
         });
         
-        function updateNote(key, val) {
+        function saveNote(key, val) {
             if (photos[key]) {
                 photos[key].note = val;
                 localStorage.setItem('soja_photos', JSON.stringify(photos));
             }
         }
         
-        function deletePhoto(key) {
+        function delPhoto(key) {
             delete photos[key];
             localStorage.setItem('soja_photos', JSON.stringify(photos));
-            renderPhoto(key);
+            renderPhotos();
         }
         
+        // Logo
         function renderLogo() {
             document.getElementById('logoBox').innerHTML = logo ? `<img src="${logo}">` : 'Logo';
         }
@@ -590,7 +617,7 @@
         document.getElementById('logoInput').addEventListener('change', async e => {
             const f = e.target.files[0];
             if (!f) return;
-            logo = await compress(f, 100, 0.6);
+            logo = await compress(f, 80, 0.5);
             localStorage.setItem('soja_logo', logo);
             renderLogo();
             e.target.value = '';
@@ -626,52 +653,43 @@
         }
         
         function exportPDF() {
-            // Mostrar detalhes
+            // Preparar
+            document.body.classList.add('pdf-ready');
             document.getElementById('details').classList.add('show');
             
-            // Configuração do PDF
-            const opt = {
-                margin: [8, 8, 8, 8],
-                filename: 'estimativa-producao-soja.pdf',
-                image: { type: 'jpeg', quality: 0.95 },
+            const content = document.getElementById('content');
+            
+            html2pdf().set({
+                margin: 5,
+                filename: 'estimativa-soja.pdf',
+                image: { type: 'jpeg', quality: 0.9 },
                 html2canvas: { 
-                    scale: 2,
+                    scale: 1.5,
                     useCORS: true,
-                    logging: false,
-                    width: 400,
-                    windowWidth: 400
+                    width: 380,
+                    windowWidth: 380,
+                    scrollY: 0,
+                    scrollX: 0
                 },
                 jsPDF: { 
                     unit: 'mm', 
                     format: 'a4', 
                     orientation: 'portrait'
-                },
-                pagebreak: { mode: 'avoid-all' }
-            };
-            
-            // Gerar PDF
-            html2pdf()
-                .set(opt)
-                .from(document.getElementById('content'))
-                .toPdf()
-                .get('pdf')
-                .then(function(pdf) {
-                    // Adicionar link clicável no PDF
-                    const pageWidth = pdf.internal.pageSize.getWidth();
-                    const pageHeight = pdf.internal.pageSize.getHeight();
-                    
-                    // Link na parte inferior
-                    pdf.setFontSize(8);
-                    pdf.setTextColor(52, 199, 89);
-                    pdf.textWithLink('SoloForte — Fazer novo cálculo', pageWidth / 2, pageHeight - 5, {
-                        url: 'https://afonsoraudinei.github.io/Calculadorasoja/',
-                        align: 'center'
-                    });
-                })
-                .save()
-                .then(() => {
-                    document.getElementById('details').classList.remove('show');
+                }
+            }).from(content).toPdf().get('pdf').then(pdf => {
+                // Link no rodapé
+                const w = pdf.internal.pageSize.getWidth();
+                const h = pdf.internal.pageSize.getHeight();
+                pdf.setFontSize(7);
+                pdf.setTextColor(52, 199, 89);
+                pdf.textWithLink('SoloForte - Fazer novo calculo', w/2, h - 3, {
+                    url: 'https://afonsoraudinei.github.io/Calculadorasoja/',
+                    align: 'center'
                 });
+            }).save().then(() => {
+                document.body.classList.remove('pdf-ready');
+                document.getElementById('details').classList.remove('show');
+            });
         }
     </script>
 </body>
