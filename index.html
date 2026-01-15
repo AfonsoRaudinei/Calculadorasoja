@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Produção de Soja</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
         :root {
@@ -47,7 +48,6 @@
         
         .card-body { padding: 2px 8px 6px; }
         
-        /* Aviso */
         .aviso {
             background: #FFFBEB;
             border-left: 2px solid #F59E0B;
@@ -58,7 +58,6 @@
         .aviso-title { font-size: 0.55rem; font-weight: 600; color: #B45309; }
         .aviso-text { font-size: 0.45rem; color: #92400E; line-height: 1.2; }
         
-        /* Fields */
         .row { display: flex; gap: 4px; margin-bottom: 3px; }
         .row:last-child { margin-bottom: 0; }
         .col { flex: 1; min-width: 0; }
@@ -118,7 +117,6 @@
             text-align: right;
         }
         
-        /* Metric com foto */
         .metric {
             display: flex;
             gap: 4px;
@@ -174,7 +172,6 @@
         
         .fields-col { flex: 1; display: flex; flex-direction: column; gap: 2px; }
         
-        /* Resultado */
         .result {
             background: linear-gradient(180deg, var(--green-dark), #14332B);
             border-radius: 8px;
@@ -231,7 +228,6 @@
         .details div { display: flex; justify-content: space-between; color: rgba(255,255,255,0.5); }
         .details span:last-child { color: rgba(255,255,255,0.8); }
         
-        /* Footer */
         .footer {
             display: flex;
             align-items: center;
@@ -268,7 +264,6 @@
         .brand-solo { color: var(--text); font-weight: 600; }
         .brand-forte { color: var(--green); font-weight: 600; }
         
-        /* FABs */
         .fabs {
             position: fixed;
             bottom: 10px;
@@ -291,10 +286,7 @@
         .fab-w svg { width: 14px; height: 14px; fill: var(--text2); }
         .fab-g { background: var(--green); }
         .fab-g svg { width: 14px; height: 14px; fill: #FFF; }
-        .fab-wpp { background: #25D366; }
-        .fab-wpp svg { width: 14px; height: 14px; fill: #FFF; }
         
-        /* Loading */
         .loading {
             display: none;
             position: fixed;
@@ -455,7 +447,7 @@
             </div>
         </section>
         
-        <div class="branding">
+        <div class="branding" id="branding">
             <a href="https://afonsoraudinei.github.io/Calculadorasoja/" target="_blank">
                 <span class="brand-solo">Solo</span><span class="brand-forte">Forte</span>
                 <span> — Fazer novo cálculo</span>
@@ -463,10 +455,9 @@
         </div>
     </main>
     
-    <div class="fabs">
+    <div class="fabs" id="fabs">
         <button class="fab fab-w" onclick="limpar()"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
-        <button class="fab fab-wpp" onclick="shareWhatsApp()" title="Compartilhar WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button>
-        <button class="fab fab-g" onclick="exportPDF()" title="Exportar PDF"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></button>
+        <button class="fab fab-g" onclick="exportPDF()" title="Exportar/Compartilhar PDF"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
     </div>
     
     <div class="loading" id="loading">
@@ -569,7 +560,6 @@
             if (el) el.addEventListener('input', () => { calc(); saveData(); });
         });
         
-        // Fotos
         function renderPhotos() {
             photoKeys.forEach(key => {
                 const col = document.getElementById(`photo${key.charAt(0).toUpperCase() + key.slice(1)}`);
@@ -620,7 +610,6 @@
             renderPhotos();
         }
         
-        // Logo
         function renderLogo() {
             document.getElementById('logoBox').innerHTML = logo ? `<img src="${logo}">` : 'Logo';
         }
@@ -663,86 +652,50 @@
             }
         }
         
-        // Gerar texto resumo
-        function getResumo() {
-            const prod = document.getElementById('produtor').value || '—';
-            const faz = document.getElementById('fazenda').value || '—';
-            const cid = document.getElementById('cidade').value || '—';
-            const cult = document.getElementById('cultivar').value || '—';
-            const area = document.getElementById('area').value || '—';
-            const liquido = document.getElementById('rLiquido').textContent;
-            const bruto = document.getElementById('rBruto').textContent;
-            const kg = document.getElementById('rKg').textContent;
-            
-            return `🌱 *ESTIMATIVA DE PRODUÇÃO - SOJA*
-
-📋 *Identificação*
-Produtor: ${prod}
-Fazenda: ${faz}
-Local: ${cid}
-Cultivar: ${cult}
-Área: ${area} ha
-
-📊 *Resultado*
-${kg} kg/ha
-${bruto} sc/ha (bruto)
-*${liquido} sc/ha (líquido)*
-
-📌 _Estimativa técnica sujeita a variações_
-
-🔗 Calcule: https://afonsoraudinei.github.io/Calculadorasoja/`;
-        }
-        
-        // WhatsApp
-        function shareWhatsApp() {
-            const texto = encodeURIComponent(getResumo());
-            window.open(`https://wa.me/?text=${texto}`, '_blank');
-        }
-        
-        // PDF
         async function exportPDF() {
-            document.getElementById('loading').classList.add('show');
-            document.getElementById('details').classList.add('show');
-            
-            // Esconder botões
-            document.querySelectorAll('.fabs, .add-btn, .del').forEach(el => el.style.display = 'none');
-            
+            const loading = document.getElementById('loading');
+            const fabs = document.getElementById('fabs');
+            const details = document.getElementById('details');
             const content = document.getElementById('content');
             
+            loading.classList.add('show');
+            fabs.style.display = 'none';
+            details.classList.add('show');
+            
+            // Esconder botões de deletar e adicionar
+            document.querySelectorAll('.add-btn, .del').forEach(el => el.style.visibility = 'hidden');
+            
             try {
+                // Capturar como imagem
                 const canvas = await html2canvas(content, {
                     scale: 2,
                     useCORS: true,
+                    backgroundColor: '#F2F2F7',
                     width: 360,
-                    windowWidth: 360,
-                    backgroundColor: '#F2F2F7'
+                    windowWidth: 360
                 });
                 
-                const imgData = canvas.toDataURL('image/jpeg', 0.9);
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
                 
-                // Criar PDF A4
-                const { jsPDF } = window.jspdf || await loadJsPDF();
+                // Criar PDF
+                const { jsPDF } = window.jspdf;
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 
                 const pageWidth = 210;
                 const pageHeight = 297;
-                const margin = 10;
-                const contentWidth = pageWidth - (margin * 2);
+                const margin = 8;
+                const maxWidth = pageWidth - (margin * 2);
+                const maxHeight = pageHeight - (margin * 2) - 10; // 10mm para rodapé
                 
-                // Calcular altura proporcional
-                const imgWidth = canvas.width;
-                const imgHeight = canvas.height;
-                const ratio = contentWidth / imgWidth;
-                const scaledHeight = imgHeight * ratio;
+                // Calcular dimensões proporcionais
+                const imgRatio = canvas.width / canvas.height;
+                let finalWidth = maxWidth;
+                let finalHeight = finalWidth / imgRatio;
                 
-                // Se maior que página, reduzir
-                let finalWidth = contentWidth;
-                let finalHeight = scaledHeight;
-                
-                if (finalHeight > pageHeight - (margin * 2)) {
-                    const scale = (pageHeight - (margin * 2)) / finalHeight;
-                    finalHeight = pageHeight - (margin * 2);
-                    finalWidth = contentWidth * scale;
+                // Se altura exceder, ajustar
+                if (finalHeight > maxHeight) {
+                    finalHeight = maxHeight;
+                    finalWidth = finalHeight * imgRatio;
                 }
                 
                 const x = (pageWidth - finalWidth) / 2;
@@ -750,57 +703,63 @@ ${bruto} sc/ha (bruto)
                 
                 pdf.addImage(imgData, 'JPEG', x, y, finalWidth, finalHeight);
                 
-                // Link no rodapé
-                pdf.setFontSize(7);
-                pdf.setTextColor(52, 199, 89);
-                pdf.textWithLink('SoloForte - Fazer novo calculo', pageWidth / 2, pageHeight - 5, {
-                    url: 'https://afonsoraudinei.github.io/Calculadorasoja/',
-                    align: 'center'
-                });
+                // Adicionar link clicável no rodapé
+                const linkY = pageHeight - 8;
+                const linkText = 'SoloForte — Fazer novo cálculo';
+                const linkUrl = 'https://afonsoraudinei.github.io/Calculadorasoja/';
                 
-                // Salvar como blob e compartilhar
+                pdf.setFontSize(9);
+                pdf.setTextColor(29, 29, 31); // Preto para "Solo"
+                const soloWidth = pdf.getTextWidth('Solo');
+                const forteWidth = pdf.getTextWidth('Forte');
+                const restWidth = pdf.getTextWidth(' — Fazer novo cálculo');
+                const totalWidth = soloWidth + forteWidth + restWidth;
+                const startX = (pageWidth - totalWidth) / 2;
+                
+                // Desenhar texto colorido
+                pdf.text('Solo', startX, linkY);
+                pdf.setTextColor(52, 199, 89); // Verde para "Forte"
+                pdf.text('Forte', startX + soloWidth, linkY);
+                pdf.setTextColor(142, 142, 147); // Cinza para o resto
+                pdf.text(' — Fazer novo cálculo', startX + soloWidth + forteWidth, linkY);
+                
+                // Adicionar link clicável na área do texto
+                pdf.link(startX, linkY - 4, totalWidth, 6, { url: linkUrl });
+                
+                // Gerar blob do PDF
                 const pdfBlob = pdf.output('blob');
-                const file = new File([pdfBlob], 'estimativa-soja.pdf', { type: 'application/pdf' });
+                const fileName = `estimativa-soja-${new Date().toISOString().slice(0,10)}.pdf`;
+                const file = new File([pdfBlob], fileName, { type: 'application/pdf' });
                 
-                // Tentar usar Web Share API (mobile)
+                // Usar Web Share API se disponível (abre menu compartilhar no celular)
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     await navigator.share({
                         files: [file],
-                        title: 'Estimativa de Produção - Soja',
-                        text: 'Segue estimativa de produção'
+                        title: 'Estimativa de Produção - Soja'
                     });
                 } else {
-                    // Fallback: download normal
-                    pdf.save('estimativa-soja.pdf');
+                    // Fallback: download direto
+                    const url = URL.createObjectURL(pdfBlob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
                 }
+                
             } catch (err) {
-                console.error(err);
-                alert('Erro ao gerar PDF');
+                console.error('Erro ao gerar PDF:', err);
+                alert('Erro ao gerar PDF. Tente novamente.');
             }
             
             // Restaurar
-            document.querySelectorAll('.fabs, .add-btn, .del').forEach(el => el.style.display = '');
-            document.getElementById('loading').classList.remove('show');
-            document.getElementById('details').classList.remove('show');
-        }
-        
-        // Carregar jsPDF dinamicamente
-        function loadJsPDF() {
-            return new Promise((resolve) => {
-                const script = document.createElement('script');
-                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-                script.onload = () => resolve(window.jspdf);
-                document.head.appendChild(script);
-            });
-        }
-        
-        // Carregar html2canvas se não existir
-        if (typeof html2canvas === 'undefined') {
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-            document.head.appendChild(script);
+            document.querySelectorAll('.add-btn, .del').forEach(el => el.style.visibility = '');
+            fabs.style.display = 'flex';
+            loading.classList.remove('show');
+            details.classList.remove('show');
         }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
