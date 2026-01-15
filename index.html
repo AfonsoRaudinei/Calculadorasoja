@@ -27,68 +27,74 @@
     
     .header {
         background: linear-gradient(180deg, var(--green-dark), #14332B);
-        padding: 8px 12px;
+        padding: 10px 16px;
         text-align: center;
     }
-    .header h1 { color: #FFF; font-size: 0.8rem; font-weight: 600; }
+    .header h1 { color: #FFF; font-size: 0.9rem; font-weight: 600; }
     
-    .container { max-width: 360px; margin: 0 auto; padding: 4px 6px 60px; }
+    .container { max-width: 420px; margin: 0 auto; padding: 6px 8px 70px; }
     
     .card {
         background: var(--card);
-        border-radius: 8px;
-        margin-bottom: 4px;
+        border-radius: 10px;
+        margin-bottom: 6px;
+        overflow: hidden;
     }
     
     .card-head {
-        padding: 4px 8px 2px;
-        font-size: 0.5rem;
+        padding: 6px 10px 3px;
+        font-size: 0.55rem;
         font-weight: 600;
         color: var(--text2);
         text-transform: uppercase;
+        letter-spacing: 0.3px;
     }
     
-    .card-body { padding: 2px 8px 6px; }
+    .card-body { padding: 4px 10px 8px; }
     
     .aviso {
         background: #FFFBEB;
-        border-left: 2px solid #F59E0B;
-        border-radius: 0 6px 6px 0;
-        padding: 4px 6px;
-        margin-bottom: 4px;
+        border-left: 3px solid #F59E0B;
+        border-radius: 0 8px 8px 0;
+        padding: 6px 10px;
+        margin-bottom: 6px;
     }
-    .aviso-title { font-size: 0.55rem; font-weight: 600; color: #B45309; }
-    .aviso-text { font-size: 0.45rem; color: #92400E; line-height: 1.2; }
+    .aviso-title { font-size: 0.6rem; font-weight: 600; color: #B45309; }
+    .aviso-text { font-size: 0.5rem; color: #92400E; line-height: 1.3; margin-top: 2px; }
     
-    .row { display: flex; gap: 4px; margin-bottom: 3px; }
-    .row:last-child { margin-bottom: 0; }
-    .col { flex: 1; min-width: 0; }
+    /* Grid de campos */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 4px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 4px; }
+    .grid-2:last-child, .grid-3:last-child { margin-bottom: 0; }
+    
+    .field { min-width: 0; }
     
     label {
         display: block;
-        font-size: 0.45rem;
+        font-size: 0.5rem;
         color: var(--text2);
-        margin-bottom: 1px;
+        margin-bottom: 2px;
         text-transform: uppercase;
+        letter-spacing: 0.2px;
     }
     
     input, textarea {
         width: 100%;
-        height: 24px;
+        height: 28px;
         background: var(--bg);
         border: none;
-        border-radius: 4px;
-        padding: 0 4px;
-        font-size: 0.7rem;
+        border-radius: 6px;
+        padding: 0 8px;
+        font-size: 0.75rem;
         font-family: var(--font);
         color: var(--text);
     }
     
     textarea {
-        height: 32px;
-        padding: 4px;
+        height: 40px;
+        padding: 8px;
         resize: none;
-        line-height: 1.2;
+        line-height: 1.3;
     }
     
     input:focus, textarea:focus { outline: 2px solid var(--green); outline-offset: -2px; }
@@ -98,13 +104,13 @@
     .unit { position: relative; }
     .unit span {
         position: absolute;
-        right: 4px;
+        right: 8px;
         top: 50%;
         transform: translateY(-50%);
-        font-size: 0.45rem;
+        font-size: 0.5rem;
         color: var(--text3);
     }
-    .unit input { padding-right: 14px; }
+    .unit input { padding-right: 20px; }
     
     .calc-field input {
         background: var(--green-light);
@@ -119,176 +125,232 @@
         text-align: right;
     }
     
-    .metric {
+    /* Seção com foto */
+    .section-photo {
         display: flex;
-        gap: 4px;
-        margin-bottom: 4px;
+        gap: 10px;
+        align-items: flex-start;
     }
-    .metric:last-child { margin-bottom: 0; }
     
-    .photo-col { width: 50px; flex-shrink: 0; }
-    .photo-col.empty { width: 18px; }
+    .photo-wrap {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+    }
     
     .photo-box {
-        width: 50px;
-        height: 50px;
-        border-radius: 4px;
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
         overflow: hidden;
         background: var(--bg);
         position: relative;
+        border: 1px solid #E5E5EA;
     }
-    .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-box img { 
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover;
+    }
     .photo-box .del {
         position: absolute;
-        top: 1px;
-        right: 1px;
-        width: 14px;
-        height: 14px;
-        background: rgba(0,0,0,0.5);
+        top: 3px;
+        right: 3px;
+        width: 18px;
+        height: 18px;
+        background: rgba(0,0,0,0.6);
         border: none;
         border-radius: 50%;
         color: #FFF;
-        font-size: 9px;
+        font-size: 11px;
         cursor: pointer;
         line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
-    .photo-note { margin-top: 2px; }
-    .photo-note input {
-        height: 16px;
-        font-size: 0.45rem;
-        padding: 0 3px;
-    }
-    
-    .add-btn {
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
+    .photo-placeholder {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
         background: var(--bg);
-        border: none;
-        color: var(--text3);
-        font-size: 10px;
+        border: 2px dashed #D1D1D6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
+        transition: all 0.2s;
     }
-    .add-btn:hover { background: var(--green-light); color: var(--green); }
+    .photo-placeholder:hover {
+        border-color: var(--green);
+        background: var(--green-light);
+    }
+    .photo-placeholder svg {
+        width: 24px;
+        height: 24px;
+        fill: #C7C7CC;
+    }
+    .photo-placeholder:hover svg {
+        fill: var(--green);
+    }
     
-    .fields-col { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .photo-note {
+        width: 80px;
+    }
+    .photo-note input {
+        height: 20px;
+        font-size: 0.5rem;
+        padding: 0 6px;
+        text-align: center;
+        background: transparent;
+        border: 1px solid #E5E5EA;
+    }
     
+    .fields-wrap {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    /* Resultado */
     .result {
         background: linear-gradient(180deg, var(--green-dark), #14332B);
-        border-radius: 8px;
-        padding: 6px;
-        margin-bottom: 4px;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 6px;
     }
     
     .result-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 3px;
+        gap: 6px;
     }
     
     .result-item {
-        background: rgba(255,255,255,0.08);
-        border-radius: 4px;
-        padding: 4px 2px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 8px;
+        padding: 8px 4px;
         text-align: center;
     }
     
     .result-main {
         grid-column: 1 / -1;
         background: var(--green);
-        margin-top: 3px;
+        margin-top: 6px;
+        padding: 12px;
     }
     
     .result-item small {
         display: block;
-        font-size: 0.4rem;
+        font-size: 0.45rem;
         color: rgba(255,255,255,0.6);
         text-transform: uppercase;
+        letter-spacing: 0.3px;
     }
-    .result-item .val { font-size: 0.7rem; font-weight: 700; color: #FFF; }
-    .result-main .val { font-size: 1rem; }
-    .result-item .un { font-size: 0.35rem; color: rgba(255,255,255,0.5); }
+    .result-item .val { 
+        font-size: 0.9rem; 
+        font-weight: 700; 
+        color: #FFF;
+        margin-top: 2px;
+    }
+    .result-main .val { font-size: 1.3rem; }
+    .result-item .un { font-size: 0.4rem; color: rgba(255,255,255,0.5); }
     
     .toggle {
         background: none;
         border: none;
-        color: rgba(255,255,255,0.4);
-        font-size: 0.4rem;
+        color: rgba(255,255,255,0.5);
+        font-size: 0.45rem;
         cursor: pointer;
-        margin-top: 3px;
+        margin-top: 6px;
+        padding: 4px 8px;
     }
     
     .details {
         display: none;
-        margin-top: 3px;
-        padding-top: 3px;
-        border-top: 1px solid rgba(255,255,255,0.1);
-        font-size: 0.4rem;
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 1px solid rgba(255,255,255,0.15);
+        font-size: 0.45rem;
     }
     .details.show { display: block; }
-    .details div { display: flex; justify-content: space-between; color: rgba(255,255,255,0.5); }
-    .details span:last-child { color: rgba(255,255,255,0.8); }
+    .details div { 
+        display: flex; 
+        justify-content: space-between; 
+        padding: 2px 0; 
+        color: rgba(255,255,255,0.5); 
+    }
+    .details span:last-child { color: rgba(255,255,255,0.85); font-weight: 500; }
     
+    /* Footer */
     .footer {
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 8px;
         background: var(--card);
-        border-radius: 8px;
-        padding: 4px 6px;
-        margin-bottom: 4px;
+        border-radius: 10px;
+        padding: 8px 10px;
+        margin-bottom: 6px;
     }
     
     .footer-logo {
-        width: 24px;
-        height: 24px;
-        border-radius: 4px;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
         background: var(--bg);
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         overflow: hidden;
-        font-size: 0.35rem;
+        font-size: 0.4rem;
         color: var(--text3);
+        border: 1px solid #E5E5EA;
     }
     .footer-logo img { width: 100%; height: 100%; object-fit: contain; }
     .footer-info { flex: 1; }
-    .footer-info input { height: 18px; font-size: 0.55rem; margin-bottom: 2px; }
+    .footer-info input { height: 22px; font-size: 0.65rem; margin-bottom: 3px; }
+    .footer-info input:last-child { margin-bottom: 0; }
     
     .branding {
         text-align: center;
-        padding: 4px;
-        font-size: 0.45rem;
+        padding: 8px;
+        font-size: 0.55rem;
     }
     .branding a { text-decoration: none; color: var(--text2); }
+    .branding a:hover { color: var(--text); }
     .brand-solo { color: var(--text); font-weight: 600; }
     .brand-forte { color: var(--green); font-weight: 600; }
     
+    /* FAB */
     .fabs {
         position: fixed;
-        bottom: 10px;
-        right: 6px;
+        bottom: 12px;
+        right: 10px;
         display: flex;
-        gap: 6px;
+        gap: 8px;
     }
     .fab {
-        width: 34px;
-        height: 34px;
+        width: 44px;
+        height: 44px;
         border-radius: 50%;
         border: none;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        transition: transform 0.2s;
     }
+    .fab:active { transform: scale(0.95); }
     .fab-w { background: #FFF; }
-    .fab-w svg { width: 14px; height: 14px; fill: var(--text2); }
+    .fab-w svg { width: 18px; height: 18px; fill: var(--text2); }
     .fab-g { background: var(--green); }
-    .fab-g svg { width: 14px; height: 14px; fill: #FFF; }
+    .fab-g svg { width: 18px; height: 18px; fill: #FFF; }
     
+    /* Loading */
     .loading {
         display: none;
         position: fixed;
@@ -301,14 +363,14 @@
     .loading.show { display: flex; }
     .loading-box {
         background: #FFF;
-        padding: 20px 30px;
-        border-radius: 12px;
+        padding: 24px 32px;
+        border-radius: 14px;
         text-align: center;
     }
-    .loading-box p { font-size: 0.75rem; color: var(--text); margin-top: 8px; }
+    .loading-box p { font-size: 0.8rem; color: var(--text); margin-top: 10px; }
     .spinner {
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
         border: 3px solid var(--bg);
         border-top-color: var(--green);
         border-radius: 50%;
@@ -317,52 +379,9 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     
-    /* Modal de opções */
-    .modal {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.5);
-        align-items: flex-end;
-        justify-content: center;
-        z-index: 1000;
-        padding: 20px;
-    }
-    .modal.show { display: flex; }
-    .modal-content {
-        background: #FFF;
-        border-radius: 14px;
-        width: 100%;
-        max-width: 360px;
-        overflow: hidden;
-    }
-    .modal-btn {
-        width: 100%;
-        padding: 16px;
-        border: none;
-        background: #FFF;
-        font-size: 1rem;
-        color: #007AFF;
-        cursor: pointer;
-        border-bottom: 1px solid #E5E5EA;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-    }
-    .modal-btn:last-child { border-bottom: none; }
-    .modal-btn:active { background: #F2F2F7; }
-    .modal-btn svg { width: 22px; height: 22px; }
-    .modal-btn.whatsapp { color: #25D366; }
-    .modal-btn.whatsapp svg { fill: #25D366; }
-    .modal-btn.download svg { fill: #007AFF; }
-    .modal-cancel {
-        margin-top: 8px;
-        border-radius: 14px;
-    }
-    .modal-cancel .modal-btn {
-        font-weight: 600;
-        color: #007AFF;
+    @media print {
+        .fabs { display: none !important; }
+        .details { display: block !important; }
     }
 </style>
 ```
@@ -380,96 +399,122 @@
         <div class="aviso-text">📢 Os números são projeções técnicas e não garantem resultados absolutos, sujeitos a variações climáticas, de manejo e campo.</div>
     </div>
     
+    <!-- Identificação -->
     <section class="card">
         <div class="card-head">Identificação</div>
         <div class="card-body">
-            <div class="row">
-                <div class="col"><label>Produtor</label><input type="text" id="produtor" placeholder="—"></div>
-                <div class="col"><label>Fazenda</label><input type="text" id="fazenda" placeholder="—"></div>
+            <div class="grid-2">
+                <div class="field"><label>Produtor</label><input type="text" id="produtor" placeholder="—"></div>
+                <div class="field"><label>Fazenda</label><input type="text" id="fazenda" placeholder="—"></div>
             </div>
-            <div class="row">
-                <div class="col"><label>Cidade/UF</label><input type="text" id="cidade" placeholder="—"></div>
-                <div class="col"><label>Cultivar</label><input type="text" id="cultivar" placeholder="—"></div>
+            <div class="grid-2">
+                <div class="field"><label>Cidade/UF</label><input type="text" id="cidade" placeholder="—"></div>
+                <div class="field"><label>Cultivar</label><input type="text" id="cultivar" placeholder="—"></div>
             </div>
-            <div class="row">
-                <div class="col unit"><label>Área</label><input type="number" id="area" placeholder="—" step="0.1"><span>ha</span></div>
-                <div class="col"><label>Data</label><input type="date" id="data"></div>
+            <div class="grid-2">
+                <div class="field unit"><label>Área</label><input type="number" id="area" placeholder="—" step="0.1"><span>ha</span></div>
+                <div class="field"><label>Data</label><input type="date" id="data"></div>
             </div>
         </div>
     </section>
     
+    <!-- População -->
     <section class="card">
         <div class="card-head">População</div>
         <div class="card-body">
-            <div class="metric" id="metricLavoura">
-                <div class="photo-col empty" id="photoLavoura">
-                    <button class="add-btn" onclick="addPhoto('lavoura')">+</button>
+            <div class="section-photo">
+                <div class="photo-wrap">
+                    <div id="photoLavoura">
+                        <div class="photo-placeholder" onclick="addPhoto('lavoura')">
+                            <svg viewBox="0 0 24 24"><path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"/></svg>
+                        </div>
+                    </div>
+                    <div class="photo-note"><input type="text" id="noteLavoura" placeholder="Nota"></div>
                 </div>
-                <div class="fields-col">
-                    <div class="row">
-                        <div class="col"><label>Plantas/Metro</label><input type="number" id="plantasMetro" placeholder="—" step="0.1"></div>
-                        <div class="col unit"><label>Espaçamento</label><input type="number" id="espacamento" value="0.5" step="0.05"><span>m</span></div>
+                <div class="fields-wrap">
+                    <div class="grid-2">
+                        <div class="field"><label>Plantas/Metro</label><input type="number" id="plantasMetro" placeholder="—" step="0.1"></div>
+                        <div class="field unit"><label>Espaçamento</label><input type="number" id="espacamento" value="0.5" step="0.05"><span>m</span></div>
                     </div>
-                    <div class="row">
-                        <div class="col calc-field"><label>Plantas/ha</label><input type="text" id="plantasHa" readonly></div>
-                    </div>
+                    <div class="field calc-field"><label>Plantas/ha</label><input type="text" id="plantasHa" readonly></div>
                 </div>
             </div>
         </div>
     </section>
     
+    <!-- Componentes -->
     <section class="card">
         <div class="card-head">Componentes de Rendimento</div>
         <div class="card-body">
-            <div class="metric" id="metricPlantas">
-                <div class="photo-col empty" id="photoPlantas">
-                    <button class="add-btn" onclick="addPhoto('plantas')">+</button>
-                </div>
-                <div class="fields-col">
-                    <div class="row">
-                        <div class="col"><label>Plantas Aval.</label><input type="number" id="plantasAval" value="3" min="1"></div>
-                        <div class="col"><label>Vagens/Pl</label><input type="number" id="vagens" placeholder="—" step="0.1"></div>
+            <!-- Vagens e Grãos -->
+            <div class="section-photo" style="margin-bottom: 8px;">
+                <div class="photo-wrap">
+                    <div id="photoPlantas">
+                        <div class="photo-placeholder" onclick="addPhoto('plantas')">
+                            <svg viewBox="0 0 24 24"><path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"/></svg>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col"><label>Grãos/Vagem</label><input type="number" id="graos" placeholder="—" step="0.1"></div>
-                        <div class="col result-field"><label>Grãos/Pl</label><input type="text" id="rGraosPl" readonly></div>
+                    <div class="photo-note"><input type="text" id="notePlantas" placeholder="Nota"></div>
+                </div>
+                <div class="fields-wrap">
+                    <div class="grid-2">
+                        <div class="field"><label>Plantas Aval.</label><input type="number" id="plantasAval" value="3" min="1"></div>
+                        <div class="field"><label>Vagens/Planta</label><input type="number" id="vagens" placeholder="—" step="0.1"></div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="metric" id="metricPmg">
-                <div class="photo-col empty" id="photoPmg">
-                    <button class="add-btn" onclick="addPhoto('pmg')">+</button>
-                </div>
-                <div class="fields-col">
-                    <div class="row">
-                        <div class="col unit"><label>PMG</label><input type="number" id="pmg" placeholder="—" step="0.1"><span>g</span></div>
-                        <div class="col result-field"><label>g/Planta</label><input type="text" id="rGramasPl" readonly></div>
+                    <div class="grid-2">
+                        <div class="field"><label>Grãos/Vagem</label><input type="number" id="graos" placeholder="—" step="0.1"></div>
+                        <div class="field result-field"><label>Grãos/Planta</label><input type="text" id="rGraosPl" readonly></div>
                     </div>
                 </div>
             </div>
             
-            <div class="metric" id="metricEntrenos">
-                <div class="photo-col empty" id="photoEntrenos">
-                    <button class="add-btn" onclick="addPhoto('entrenos')">+</button>
+            <!-- PMG -->
+            <div class="section-photo" style="margin-bottom: 8px;">
+                <div class="photo-wrap">
+                    <div id="photoPmg">
+                        <div class="photo-placeholder" onclick="addPhoto('pmg')">
+                            <svg viewBox="0 0 24 24"><path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"/></svg>
+                        </div>
+                    </div>
+                    <div class="photo-note"><input type="text" id="notePmg" placeholder="Nota"></div>
                 </div>
-                <div class="fields-col">
-                    <div class="row">
-                        <div class="col"><label>Entrenós/Pl</label><input type="number" id="entrenos" placeholder="—"></div>
-                        <div class="col unit"><label>Perdas</label><input type="number" id="perdas" value="20"><span>%</span></div>
+                <div class="fields-wrap">
+                    <div class="grid-2">
+                        <div class="field unit"><label>PMG</label><input type="number" id="pmg" placeholder="—" step="0.1"><span>g</span></div>
+                        <div class="field result-field"><label>g/Planta</label><input type="text" id="rGramasPl" readonly></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Entrenós -->
+            <div class="section-photo">
+                <div class="photo-wrap">
+                    <div id="photoEntrenos">
+                        <div class="photo-placeholder" onclick="addPhoto('entrenos')">
+                            <svg viewBox="0 0 24 24"><path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"/></svg>
+                        </div>
+                    </div>
+                    <div class="photo-note"><input type="text" id="noteEntrenos" placeholder="Nota"></div>
+                </div>
+                <div class="fields-wrap">
+                    <div class="grid-2">
+                        <div class="field"><label>Entrenós/Planta</label><input type="number" id="entrenos" placeholder="—"></div>
+                        <div class="field unit"><label>Perdas</label><input type="number" id="perdas" value="20"><span>%</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     
+    <!-- Observações -->
     <section class="card">
         <div class="card-head">Observações</div>
         <div class="card-body">
-            <textarea id="anotacaoGeral" placeholder="Anotações gerais..."></textarea>
+            <textarea id="anotacaoGeral" placeholder="Anotações gerais sobre a avaliação..."></textarea>
         </div>
     </section>
     
+    <!-- Resultado -->
     <section class="result">
         <div class="result-grid">
             <div class="result-item"><small>kg/ha</small><div class="val" id="rKg">—</div></div>
@@ -477,16 +522,17 @@
             <div class="result-item"><small>Líquido</small><div class="val" id="rLiqItem">—</div><div class="un">sc/ha</div></div>
             <div class="result-item result-main"><small>Produção Estimada</small><div class="val" id="rLiquido">—</div><div class="un">sacas/ha</div></div>
         </div>
-        <button class="toggle" onclick="toggleDetails()">▼ Detalhes</button>
+        <button class="toggle" onclick="toggleDetails()">▼ Detalhes do cálculo</button>
         <div class="details" id="details">
-            <div><span>Grãos/pl</span><span id="d1">—</span></div>
-            <div><span>g/pl</span><span id="d2">—</span></div>
+            <div><span>Grãos/planta</span><span id="d1">—</span></div>
+            <div><span>Gramas/planta</span><span id="d2">—</span></div>
             <div><span>kg/ha</span><span id="d3">—</span></div>
-            <div><span>Bruto</span><span id="d4">—</span></div>
-            <div><span>Líquido</span><span id="d5">—</span></div>
+            <div><span>Sacas bruto</span><span id="d4">—</span></div>
+            <div><span>Sacas líquido</span><span id="d5">—</span></div>
         </div>
     </section>
     
+    <!-- Footer -->
     <section class="footer">
         <div class="footer-logo" onclick="document.getElementById('logoInput').click()" id="logoBox">Logo</div>
         <div class="footer-info">
@@ -495,7 +541,7 @@
         </div>
     </section>
     
-    <div class="branding" id="branding">
+    <div class="branding">
         <a href="https://afonsoraudinei.github.io/Calculadorasoja/" target="_blank">
             <span class="brand-solo">Solo</span><span class="brand-forte">Forte</span>
             <span> — Fazer novo cálculo</span>
@@ -504,47 +550,26 @@
 </main>
 
 <div class="fabs" id="fabs">
-    <button class="fab fab-w" onclick="limpar()"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
-    <button class="fab fab-g" onclick="showOptions()" title="Exportar PDF"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
+    <button class="fab fab-w" onclick="limpar()" title="Limpar"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+    <button class="fab fab-g" onclick="exportPDF()" title="Exportar PDF"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></button>
 </div>
 
 <div class="loading" id="loading">
     <div class="loading-box">
         <div class="spinner"></div>
-        <p id="loadingText">Gerando PDF...</p>
+        <p>Gerando PDF...</p>
     </div>
 </div>
 
-<!-- Modal de opções -->
-<div class="modal" id="modal" onclick="hideModal(event)">
-    <div>
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-btn whatsapp" onclick="exportAndShare('whatsapp')">
-                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Enviar via WhatsApp
-            </button>
-            <button class="modal-btn download" onclick="exportAndShare('download')">
-                <svg viewBox="0 0 24 24" fill="#007AFF"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                Salvar no celular
-            </button>
-        </div>
-        <div class="modal-content modal-cancel">
-            <button class="modal-btn" onclick="hideModal()">Cancelar</button>
-        </div>
-    </div>
-</div>
-
-<input type="file" id="fileInput" accept="image/*" hidden>
+<input type="file" id="fileInput" accept="image/*" capture="environment" hidden>
 <input type="file" id="logoInput" accept="image/*" hidden>
 
 <script>
     let photos = JSON.parse(localStorage.getItem('soja_photos')) || {};
     let logo = localStorage.getItem('soja_logo') || null;
     let currentKey = null;
-    let pdfBlob = null;
-    let pdfFileName = '';
     
-    const fields = ['produtor','fazenda','cidade','cultivar','area','data','plantasMetro','espacamento','plantasAval','vagens','graos','pmg','entrenos','perdas','editorNome','editorContato','anotacaoGeral'];
+    const fields = ['produtor','fazenda','cidade','cultivar','area','data','plantasMetro','espacamento','plantasAval','vagens','graos','pmg','entrenos','perdas','editorNome','editorContato','anotacaoGeral','noteLavoura','notePlantas','notePmg','noteEntrenos'];
     const photoKeys = ['lavoura','plantas','pmg','entrenos'];
     
     document.addEventListener('DOMContentLoaded', () => {
@@ -552,7 +577,9 @@
         renderPhotos();
         renderLogo();
         calc();
-        if (!document.getElementById('data').value) document.getElementById('data').valueAsDate = new Date();
+        if (!document.getElementById('data').value) {
+            document.getElementById('data').valueAsDate = new Date();
+        }
     });
     
     function loadData() {
@@ -599,6 +626,7 @@
         
         if (!plantasHa || !v || !g || !pmg) {
             ['rKg','rBruto','rLiqItem','rLiquido'].forEach(id => document.getElementById(id).textContent = '—');
+            ['d1','d2','d3','d4','d5'].forEach(id => document.getElementById(id).textContent = '—');
             return;
         }
         
@@ -611,11 +639,11 @@
         document.getElementById('rLiqItem').textContent = scL.toFixed(1);
         document.getElementById('rLiquido').textContent = scL.toFixed(2);
         
-        document.getElementById('d1').textContent = `${v}×${g}=${graosPl.toFixed(1)}`;
-        document.getElementById('d2').textContent = `${gramasPl.toFixed(2)}g`;
-        document.getElementById('d3').textContent = `${kgHa.toFixed(0)}`;
-        document.getElementById('d4').textContent = `${scB.toFixed(2)}sc`;
-        document.getElementById('d5').textContent = `${scL.toFixed(2)}sc`;
+        document.getElementById('d1').textContent = `${v} × ${g} = ${graosPl.toFixed(1)}`;
+        document.getElementById('d2').textContent = `${graosPl.toFixed(1)} × ${(pmg/1000).toFixed(3)} = ${gramasPl.toFixed(2)}g`;
+        document.getElementById('d3').textContent = `${gramasPl.toFixed(2)} × ${plantasHa.toLocaleString()} = ${kgHa.toFixed(0)}`;
+        document.getElementById('d4').textContent = `${kgHa.toFixed(0)} ÷ 60 = ${scB.toFixed(2)} sc`;
+        document.getElementById('d5').textContent = `${scB.toFixed(2)} × ${((100-p)/100).toFixed(2)} = ${scL.toFixed(2)} sc`;
         
         saveData();
     }
@@ -629,25 +657,25 @@
         if (el) el.addEventListener('input', () => { calc(); saveData(); });
     });
     
+    // Fotos
     function renderPhotos() {
         photoKeys.forEach(key => {
-            const col = document.getElementById(`photo${key.charAt(0).toUpperCase() + key.slice(1)}`);
-            if (!col) return;
+            const container = document.getElementById(`photo${key.charAt(0).toUpperCase() + key.slice(1)}`);
+            if (!container) return;
             
-            if (photos[key]?.src) {
-                col.classList.remove('empty');
-                col.innerHTML = `
+            if (photos[key]) {
+                container.innerHTML = `
                     <div class="photo-box">
-                        <img src="${photos[key].src}">
+                        <img src="${photos[key]}">
                         <button class="del" onclick="delPhoto('${key}')">×</button>
-                    </div>
-                    <div class="photo-note">
-                        <input placeholder="Nota" value="${photos[key].note||''}" oninput="saveNote('${key}',this.value)">
                     </div>
                 `;
             } else {
-                col.classList.add('empty');
-                col.innerHTML = `<button class="add-btn" onclick="addPhoto('${key}')">+</button>`;
+                container.innerHTML = `
+                    <div class="photo-placeholder" onclick="addPhoto('${key}')">
+                        <svg viewBox="0 0 24 24"><path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"/></svg>
+                    </div>
+                `;
             }
         });
     }
@@ -660,18 +688,18 @@
     document.getElementById('fileInput').addEventListener('change', async e => {
         const f = e.target.files[0];
         if (!f || !currentKey) return;
-        photos[currentKey] = { src: await compress(f, 400, 0.5), note: '' };
-        localStorage.setItem('soja_photos', JSON.stringify(photos));
-        renderPhotos();
+        
+        try {
+            const compressed = await compressImage(f, 600, 0.8);
+            photos[currentKey] = compressed;
+            localStorage.setItem('soja_photos', JSON.stringify(photos));
+            renderPhotos();
+        } catch (err) {
+            console.error('Erro ao processar imagem:', err);
+        }
+        
         e.target.value = '';
     });
-    
-    function saveNote(key, val) {
-        if (photos[key]) {
-            photos[key].note = val;
-            localStorage.setItem('soja_photos', JSON.stringify(photos));
-        }
-    }
     
     function delPhoto(key) {
         delete photos[key];
@@ -679,35 +707,65 @@
         renderPhotos();
     }
     
+    // Logo
     function renderLogo() {
-        document.getElementById('logoBox').innerHTML = logo ? `<img src="${logo}">` : 'Logo';
+        const box = document.getElementById('logoBox');
+        box.innerHTML = logo ? `<img src="${logo}">` : 'Logo';
     }
     
     document.getElementById('logoInput').addEventListener('change', async e => {
         const f = e.target.files[0];
         if (!f) return;
-        logo = await compress(f, 60, 0.4);
-        localStorage.setItem('soja_logo', logo);
-        renderLogo();
+        
+        try {
+            logo = await compressImage(f, 100, 0.7);
+            localStorage.setItem('soja_logo', logo);
+            renderLogo();
+        } catch (err) {
+            console.error('Erro ao processar logo:', err);
+        }
+        
         e.target.value = '';
     });
     
-    function compress(file, max, q) {
-        return new Promise(r => {
+    // Compressão de imagem com qualidade melhor
+    function compressImage(file, maxSize, quality) {
+        return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = e => {
                 const img = new Image();
                 img.onload = () => {
-                    const c = document.createElement('canvas');
-                    let w = img.width, h = img.height;
-                    if (w > h && w > max) { h = h * max / w; w = max; }
-                    else if (h > max) { w = w * max / h; h = max; }
-                    c.width = w; c.height = h;
-                    c.getContext('2d').drawImage(img, 0, 0, w, h);
-                    r(c.toDataURL('image/jpeg', q));
+                    const canvas = document.createElement('canvas');
+                    let w = img.width;
+                    let h = img.height;
+                    
+                    // Redimensionar mantendo proporção
+                    if (w > h) {
+                        if (w > maxSize) {
+                            h = Math.round(h * maxSize / w);
+                            w = maxSize;
+                        }
+                    } else {
+                        if (h > maxSize) {
+                            w = Math.round(w * maxSize / h);
+                            h = maxSize;
+                        }
+                    }
+                    
+                    canvas.width = w;
+                    canvas.height = h;
+                    
+                    const ctx = canvas.getContext('2d');
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+                    ctx.drawImage(img, 0, 0, w, h);
+                    
+                    resolve(canvas.toDataURL('image/jpeg', quality));
                 };
+                img.onerror = reject;
                 img.src = e.target.result;
             };
+            reader.onerror = reject;
             reader.readAsDataURL(file);
         });
     }
@@ -721,17 +779,8 @@
         }
     }
     
-    function showOptions() {
-        document.getElementById('modal').classList.add('show');
-    }
-    
-    function hideModal(e) {
-        if (!e || e.target === document.getElementById('modal')) {
-            document.getElementById('modal').classList.remove('show');
-        }
-    }
-    
-    async function generatePDF() {
+    // Exportar PDF
+    async function exportPDF() {
         const loading = document.getElementById('loading');
         const fabs = document.getElementById('fabs');
         const details = document.getElementById('details');
@@ -741,146 +790,99 @@
         fabs.style.display = 'none';
         details.classList.add('show');
         
-        document.querySelectorAll('.add-btn, .del').forEach(el => el.style.visibility = 'hidden');
+        // Esconder placeholders vazios e botões de delete
+        document.querySelectorAll('.photo-placeholder, .del').forEach(el => {
+            el.style.visibility = 'hidden';
+        });
         
         try {
-            // Aguardar bibliotecas carregarem
             await new Promise(r => setTimeout(r, 100));
             
             const canvas = await html2canvas(content, {
                 scale: 2,
                 useCORS: true,
-                backgroundColor: '#F2F2F7',
-                width: 360,
-                windowWidth: 360,
+                backgroundColor: '#FFFFFF',
+                width: content.offsetWidth,
+                windowWidth: content.offsetWidth,
                 logging: false
             });
-            
-            const imgData = canvas.toDataURL('image/jpeg', 0.92);
             
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF('p', 'mm', 'a4');
             
             const pageWidth = 210;
             const pageHeight = 297;
-            const margin = 8;
-            const maxWidth = pageWidth - (margin * 2);
-            const maxHeight = pageHeight - (margin * 2) - 10;
+            const borderSize = 4;
             
+            // Borda verde escura
+            pdf.setFillColor(27, 67, 50); // --green-dark
+            pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+            
+            // Área branca interna
+            const innerX = borderSize;
+            const innerY = borderSize;
+            const innerW = pageWidth - (borderSize * 2);
+            const innerH = pageHeight - (borderSize * 2) - 8; // espaço para link
+            
+            pdf.setFillColor(255, 255, 255);
+            pdf.rect(innerX, innerY, innerW, innerH, 'F');
+            
+            // Imagem do conteúdo
+            const imgData = canvas.toDataURL('image/jpeg', 0.95);
             const imgRatio = canvas.width / canvas.height;
-            let finalWidth = maxWidth;
-            let finalHeight = finalWidth / imgRatio;
             
-            if (finalHeight > maxHeight) {
-                finalHeight = maxHeight;
-                finalWidth = finalHeight * imgRatio;
+            let imgW = innerW - 4;
+            let imgH = imgW / imgRatio;
+            
+            if (imgH > innerH - 4) {
+                imgH = innerH - 4;
+                imgW = imgH * imgRatio;
             }
             
-            const x = (pageWidth - finalWidth) / 2;
-            const y = margin;
+            const imgX = innerX + (innerW - imgW) / 2;
+            const imgY = innerY + 2;
             
-            pdf.addImage(imgData, 'JPEG', x, y, finalWidth, finalHeight);
+            pdf.addImage(imgData, 'JPEG', imgX, imgY, imgW, imgH);
             
-            // Link no rodapé
-            const linkY = pageHeight - 8;
+            // Link no rodapé (dentro da borda)
+            const linkY = pageHeight - borderSize - 2;
             const linkUrl = 'https://afonsoraudinei.github.io/Calculadorasoja/';
             
-            pdf.setFontSize(9);
-            pdf.setTextColor(29, 29, 31);
+            pdf.setFontSize(8);
+            const text = 'SoloForte — Fazer novo cálculo';
+            const textW = pdf.getTextWidth(text);
+            const textX = (pageWidth - textW) / 2;
+            
+            // Texto colorido
+            pdf.setTextColor(255, 255, 255);
+            pdf.text('Solo', textX, linkY);
             const soloW = pdf.getTextWidth('Solo');
+            
             pdf.setTextColor(52, 199, 89);
+            pdf.text('Forte', textX + soloW, linkY);
             const forteW = pdf.getTextWidth('Forte');
-            pdf.setTextColor(142, 142, 147);
-            const restW = pdf.getTextWidth(' — Fazer novo cálculo');
-            const totalW = soloW + forteW + restW;
-            const startX = (pageWidth - totalW) / 2;
             
-            pdf.setTextColor(29, 29, 31);
-            pdf.text('Solo', startX, linkY);
-            pdf.setTextColor(52, 199, 89);
-            pdf.text('Forte', startX + soloW, linkY);
-            pdf.setTextColor(142, 142, 147);
-            pdf.text(' — Fazer novo cálculo', startX + soloW + forteW, linkY);
+            pdf.setTextColor(200, 200, 200);
+            pdf.text(' — Fazer novo cálculo', textX + soloW + forteW, linkY);
             
-            pdf.link(startX, linkY - 4, totalW, 6, { url: linkUrl });
+            // Link clicável
+            pdf.link(textX, linkY - 3, textW, 5, { url: linkUrl });
             
-            pdfBlob = pdf.output('blob');
-            pdfFileName = `estimativa-soja-${new Date().toISOString().slice(0,10)}.pdf`;
-            
-            return true;
+            // Salvar
+            const fileName = `estimativa-soja-${new Date().toISOString().slice(0,10)}.pdf`;
+            pdf.save(fileName);
             
         } catch (err) {
-            console.error('Erro:', err);
-            return false;
+            console.error('Erro ao gerar PDF:', err);
+            alert('Erro ao gerar PDF. Tente novamente.');
         } finally {
-            document.querySelectorAll('.add-btn, .del').forEach(el => el.style.visibility = '');
+            // Restaurar
+            document.querySelectorAll('.photo-placeholder, .del').forEach(el => {
+                el.style.visibility = '';
+            });
             fabs.style.display = 'flex';
             loading.classList.remove('show');
             details.classList.remove('show');
-        }
-    }
-    
-    async function exportAndShare(action) {
-        hideModal();
-        
-        document.getElementById('loadingText').textContent = 'Gerando PDF...';
-        
-        const success = await generatePDF();
-        
-        if (!success || !pdfBlob) {
-            alert('Erro ao gerar PDF. Tente novamente.');
-            return;
-        }
-        
-        if (action === 'download') {
-            // Download direto
-            const url = URL.createObjectURL(pdfBlob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = pdfFileName;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-        } else if (action === 'whatsapp') {
-            // Tentar Web Share API primeiro
-            try {
-                const file = new File([pdfBlob], pdfFileName, { type: 'application/pdf' });
-                
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    await navigator.share({
-                        files: [file],
-                        title: 'Estimativa Soja'
-                    });
-                } else {
-                    // Fallback: download e instrução
-                    const url = URL.createObjectURL(pdfBlob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = pdfFileName;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                    
-                    setTimeout(() => {
-                        alert('PDF salvo! Abra o WhatsApp e anexe o arquivo da pasta Downloads.');
-                    }, 500);
-                }
-            } catch (err) {
-                // Se usuário cancelou ou erro, fazer download
-                if (err.name !== 'AbortError') {
-                    const url = URL.createObjectURL(pdfBlob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = pdfFileName;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                }
-            }
         }
     }
 </script>
