@@ -297,14 +297,50 @@
     .footer-info input:last-child { margin-bottom: 0; }
     
     .branding {
-        text-align: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
         padding: 8px;
-        font-size: 0.55rem;
+        font-size: 0.5rem;
     }
-    .branding a { text-decoration: none; color: var(--text2); }
-    .branding a:hover { color: var(--text); }
+    .branding-link {
+        background: var(--card);
+        border-radius: 8px;
+        padding: 6px 8px;
+        text-align: center;
+        text-decoration: none;
+        color: var(--text);
+        transition: all 0.2s;
+        border: 1px solid #E5E5EA;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 50px;
+    }
+    .branding-link:hover {
+        border-color: var(--green);
+        background: var(--green-light);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(52, 199, 89, 0.2);
+    }
     .brand-solo { color: var(--text); font-weight: 600; }
     .brand-forte { color: var(--green); font-weight: 600; }
+    .branding-link .icon {
+        font-size: 1.2rem;
+        margin-bottom: 2px;
+    }
+    .branding-link .title {
+        font-weight: 600;
+        font-size: 0.55rem;
+        color: var(--text);
+    }
+    .branding-link small {
+        display: block;
+        font-size: 0.4rem;
+        color: var(--text3);
+        margin-top: 1px;
+    }
     
     .fabs {
         position: fixed;
@@ -359,71 +395,124 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     
-    /* Estilos específicos para PDF */
+    /* Estilos PDF - Imagens maiores, melhor qualidade */
     .pdf-mode {
-        --photo-size: 120px;
+        --photo-size: 100px;
     }
     .pdf-mode .container {
         max-width: 100%;
         padding: 0;
+        background: #FFF;
     }
-    .pdf-mode .card {
-        border-radius: 0;
-        margin-bottom: 0;
-        border-bottom: 1px solid #E5E5EA;
-    }
-    .pdf-mode .card-body {
-        padding: 8px 12px 12px;
-    }
-    .pdf-mode .aviso {
-        border-radius: 0;
-        margin-bottom: 0;
-        padding: 10px 12px;
-    }
-    .pdf-mode .result {
-        border-radius: 0;
-        margin-bottom: 0;
+    .pdf-mode .pdf-content {
         padding: 12px;
     }
-    .pdf-mode .footer {
-        border-radius: 0;
-        margin-bottom: 0;
+    .pdf-mode .card {
+        border-radius: 12px;
+        margin-bottom: 10px;
+        page-break-inside: avoid;
+    }
+    .pdf-mode .card-head {
+        padding: 8px 12px 4px;
+        font-size: 0.6rem;
+    }
+    .pdf-mode .card-body {
+        padding: 6px 12px 10px;
+    }
+    .pdf-mode .aviso {
+        border-radius: 0 10px 10px 0;
+        margin-bottom: 10px;
         padding: 10px 12px;
+        page-break-inside: avoid;
+    }
+    .pdf-mode .aviso-title {
+        font-size: 0.65rem;
+    }
+    .pdf-mode .aviso-text {
+        font-size: 0.55rem;
+    }
+    .pdf-mode .result {
+        border-radius: 12px;
+        margin-bottom: 10px;
+        padding: 12px;
+        page-break-inside: avoid;
+    }
+    .pdf-mode .footer {
+        border-radius: 12px;
+        margin-bottom: 10px;
+        padding: 10px 12px;
+        page-break-inside: avoid;
+    }
+    .pdf-mode .footer-logo {
+        width: 50px;
+        height: 50px;
     }
     .pdf-mode .branding {
-        padding: 10px 12px;
-        background: var(--green-dark);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 12px;
+        background: transparent;
+        page-break-inside: avoid;
     }
-    .pdf-mode .branding a {
+    .pdf-mode .branding-link {
+        background: var(--green-dark);
         color: #FFF;
+        border: 2px solid rgba(255,255,255,0.1);
+        padding: 10px;
+        min-height: 60px;
+    }
+    .pdf-mode .branding-link .icon {
+        font-size: 1.4rem;
+        margin-bottom: 3px;
+    }
+    .pdf-mode .branding-link .title {
+        color: #FFF;
+        font-size: 0.6rem;
     }
     .pdf-mode .brand-solo {
         color: #FFF;
     }
+    .pdf-mode .brand-forte {
+        color: var(--green);
+    }
+    .pdf-mode .branding-link small {
+        color: rgba(255,255,255,0.6);
+        font-size: 0.45rem;
+    }
     .pdf-mode .grid-2 {
-        gap: 10px;
-        margin-bottom: 8px;
+        gap: 8px;
+        margin-bottom: 6px;
     }
     .pdf-mode input, .pdf-mode textarea {
         height: 32px;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        padding: 0 10px;
     }
     .pdf-mode textarea {
         height: 50px;
+        padding: 10px;
     }
     .pdf-mode label {
-        font-size: 0.55rem;
+        font-size: 0.58rem;
         margin-bottom: 3px;
     }
     .pdf-mode .section-photo {
         gap: 12px;
     }
     .pdf-mode .photo-col {
-        width: 120px;
+        width: 100px;
     }
     .pdf-mode .photo-box {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+    }
+    .pdf-mode .result-item .val {
+        font-size: 1rem;
+    }
+    .pdf-mode .result-main .val {
+        font-size: 1.5rem;
     }
     
     @media print {
@@ -579,9 +668,25 @@
         </section>
         
         <div class="branding">
-            <a href="https://afonsoraudinei.github.io/Calculadorasoja/" target="_blank">
-                <span class="brand-solo">Solo</span><span class="brand-forte">Forte</span>
-                <span> — Fazer novo cálculo</span>
+            <a href="https://afonsoraudinei.github.io/Calculadorasoja/" target="_blank" class="branding-link">
+                <div class="icon">🌱</div>
+                <div class="title"><span class="brand-solo">Solo</span><span class="brand-forte">Forte</span></div>
+                <small>Nova estimativa</small>
+            </a>
+            <a href="https://afonsoraudinei.github.io/Relat-rio-/" target="_blank" class="branding-link">
+                <div class="icon">📋</div>
+                <div class="title">Avaliação</div>
+                <small>Relatório completo</small>
+            </a>
+            <a href="https://afonsoraudinei.github.io/ocorrencia/" target="_blank" class="branding-link">
+                <div class="icon">⚠️</div>
+                <div class="title">Ocorrência</div>
+                <small>Registrar problema</small>
+            </a>
+            <a href="https://afonsoraudinei.github.io/Planejamento/" target="_blank" class="branding-link">
+                <div class="icon">📅</div>
+                <div class="title">Planejamento</div>
+                <small>Agenda semanal</small>
             </a>
         </div>
     </main>
@@ -727,7 +832,8 @@
         if (!f || !currentKey) return;
         
         try {
-            const compressed = await compressImage(f, 800, 0.85);
+            // Compressão mais agressiva para melhor qualidade no PDF
+            const compressed = await compressImage(f, 1200, 0.90);
             photos[currentKey] = compressed;
             localStorage.setItem('soja_photos', JSON.stringify(photos));
             renderPhotos();
@@ -757,7 +863,7 @@
         if (!f) return;
         
         try {
-            logo = await compressImage(f, 150, 0.8);
+            logo = await compressImage(f, 200, 0.85);
             localStorage.setItem('soja_logo', logo);
             renderLogo();
         } catch (err) {
@@ -821,13 +927,12 @@
         const fabs = document.getElementById('fabs');
         const details = document.getElementById('details');
         const content = document.getElementById('content');
-        const container = document.querySelector('.container');
         
         loading.classList.add('show');
         fabs.style.display = 'none';
         details.classList.add('show');
         
-        // Ativar modo PDF (fotos maiores, 100% largura)
+        // Ativar modo PDF
         document.body.classList.add('pdf-mode');
         
         document.querySelectorAll('.photo-placeholder, .del').forEach(el => {
@@ -835,18 +940,16 @@
         });
         
         try {
-            await new Promise(r => setTimeout(r, 150));
+            await new Promise(r => setTimeout(r, 200));
             
-            // Largura do A4 em pixels (para boa qualidade)
-            const pdfWidth = 595; // A4 width in points at 72dpi
-            
+            // Canvas com alta resolução
             const canvas = await html2canvas(content, {
-                scale: 2,
+                scale: 3, // Alta qualidade
                 useCORS: true,
                 backgroundColor: '#FFFFFF',
-                width: pdfWidth,
-                windowWidth: pdfWidth,
-                logging: false
+                logging: false,
+                imageTimeout: 0,
+                allowTaint: true
             });
             
             const { jsPDF } = window.jspdf;
@@ -854,39 +957,31 @@
             
             const pageWidth = 210;
             const pageHeight = 297;
-            const borderSize = 3;
+            const margin = 0; // SEM MARGEM
             
-            // Borda verde escura
-            pdf.setFillColor(27, 67, 50);
-            pdf.rect(0, 0, pageWidth, pageHeight, 'F');
-            
-            // Área branca interna - ocupa quase tudo
-            const innerX = borderSize;
-            const innerY = borderSize;
-            const innerW = pageWidth - (borderSize * 2);
-            const innerH = pageHeight - (borderSize * 2);
-            
-            pdf.setFillColor(255, 255, 255);
-            pdf.rect(innerX, innerY, innerW, innerH, 'F');
-            
-            // Imagem do conteúdo - ocupa toda a largura
             const imgData = canvas.toDataURL('image/jpeg', 0.95);
-            const imgRatio = canvas.width / canvas.height;
+            const imgWidth = canvas.width;
+            const imgHeight = canvas.height;
+            const ratio = imgWidth / imgHeight;
             
-            // Usar toda a largura disponível
-            let imgW = innerW;
-            let imgH = imgW / imgRatio;
+            // Usar página inteira
+            let pdfWidth = pageWidth;
+            let pdfHeight = pdfWidth / ratio;
             
-            // Se altura exceder, ajustar
-            if (imgH > innerH) {
-                imgH = innerH;
-                imgW = imgH * imgRatio;
+            let position = 0;
+            let heightLeft = pdfHeight;
+            
+            // Primeira página - SEM BORDA
+            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, '', 'FAST');
+            heightLeft -= pageHeight;
+            
+            // Adicionar páginas extras se necessário
+            while (heightLeft > 0) {
+                position = heightLeft - pdfHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, pdfHeight, '', 'FAST');
+                heightLeft -= pageHeight;
             }
-            
-            const imgX = innerX + (innerW - imgW) / 2;
-            const imgY = innerY;
-            
-            pdf.addImage(imgData, 'JPEG', imgX, imgY, imgW, imgH);
             
             const fileName = `estimativa-soja-${new Date().toISOString().slice(0,10)}.pdf`;
             pdf.save(fileName);
@@ -895,7 +990,6 @@
             console.error('Erro ao gerar PDF:', err);
             alert('Erro ao gerar PDF. Tente novamente.');
         } finally {
-            // Desativar modo PDF
             document.body.classList.remove('pdf-mode');
             
             document.querySelectorAll('.photo-placeholder, .del').forEach(el => {
