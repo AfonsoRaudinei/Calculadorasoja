@@ -1089,15 +1089,15 @@
             
             const pageWidth = 210;
             const pageHeight = 297;
-            const margin = 8; // Margem interna
+            const margin = 6; // Margem menor
             const contentWidth = pageWidth - (margin * 2);
             const maxHeight = pageHeight - (margin * 2);
             
             let currentY = margin;
-            let isFirstElement = true;
+            let pageNumber = 1;
             
             // Função para adicionar elemento ao PDF
-            async function addElementToPDF(element) {
+            async function addElementToPDF(element, isPhoto = false) {
                 const canvas = await html2canvas(element, {
                     scale: 2.5,
                     useCORS: true,
@@ -1111,38 +1111,83 @@
                 const imgWidth = contentWidth;
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
                 
+                // Gap menor entre elementos (2mm normal, 1mm para fotos)
+                const gap = isPhoto ? 1 : 2;
+                
                 // Se não couber na página atual, criar nova
-                if (currentY + imgHeight > maxHeight && !isFirstElement) {
+                if (currentY + imgHeight > maxHeight) {
                     pdf.addPage();
                     currentY = margin;
+                    pageNumber++;
                 }
                 
                 pdf.addImage(imgData, 'JPEG', margin, currentY, imgWidth, imgHeight);
-                currentY += imgHeight + 4; // 4mm de espaço entre elementos
-                isFirstElement = false;
+                currentY += imgHeight + gap;
             }
             
             // Capturar cada seção separadamente
-            const sections = content.querySelectorAll('.aviso, .card, .result, .photo-gallery, .footer, .branding');
+            const aviso = content.querySelector('.aviso');
+            if (aviso) await addElementToPDF(aviso);
             
-            for (const section of sections) {
-                await addElementToPDF(section);
+            const cards = content.querySelectorAll('.card');
+            for (const card of cards) {
+                await addElementToPDF(card);
             }
             
-            // Adicionar links clicáveis na última página (rodapé)
+            const result = content.querySelector('.result');
+            if (result) await addElementToPDF(result);
+            
+            // Fotos individuais com gap menor
+            const photoItems = content.querySelectorAll('.photo-item');
+            if (photoItems.length > 0) {
+                // Adicionar header da galeria se houver fotos
+                const galleryHead = content.querySelector('.photo-gallery-head');
+                if (galleryHead) {
+                    const headCanvas = await html2canvas(galleryHead, {
+                        scale: 2.5,
+                        useCORS: true,
+                        backgroundColor: '#FFFFFF',
+                        logging: false
+                    });
+                    const headData = headCanvas.toDataURL('image/jpeg', 0.92);
+                    const headWidth = contentWidth;
+                    const headHeight = (headCanvas.height * headWidth) / headCanvas.width;
+                    
+                    if (currentY + headHeight > maxHeight) {
+                        pdf.addPage();
+                        currentY = margin;
+                        pageNumber++;
+                    }
+                    
+                    pdf.addImage(headData, 'JPEG', margin, currentY, headWidth, headHeight);
+                    currentY += headHeight + 2;
+                }
+                
+                for (const photo of photoItems) {
+                    await addElementToPDF(photo, true);
+                }
+            }
+            
+            const footer = content.querySelector('.footer');
+            if (footer) await addElementToPDF(footer);
+            
+            const branding = content.querySelector('.branding');
+            if (branding) await addElementToPDF(branding);
+            
+            // Adicionar links clicáveis na última página
             const totalPages = pdf.internal.getNumberOfPages();
             pdf.setPage(totalPages);
             
-            // Calcular posição dos links no rodapé
+            // Posição dos links baseada no branding
             const linkHeight = 12;
-            const linkY = pageHeight - 30;
             const linkWidth = (contentWidth - 4) / 2;
+            const brandingBottom = currentY - 2; // Posição aproximada do branding
             
             const links = [
-                { url: 'https://afonsoraudinei.github.io/Calculadorasoja/', x: margin, y: linkY },
-                { url: 'https://afonsoraudinei.github.io/Relat-rio-/', x: pageWidth/2 + 1, y: linkY },
-                { url: 'https://afonsoraudinei.github.io/ocorrencia/', x: margin, y: linkY + linkHeight + 2 },
-                { url: 'https://afonsoraudinei.github.io/Planejamento/', x: pageWidth/2 + 1, y: linkY + linkHeight + 2 }
+                { url: 'https://afonsoraudinei.github.io/Calculadorasoja/', x: margin, y: brandingBottom },
+                { url: 'https://afonsoraudinei.github.io/Relat-rio-/', x: pageWidth/2 + 1, y: brandingBottom },
+                { url: 'https://afonsoraudinei.github.io/ocorrencia/', x: margin, y: brandingBottom + linkHeight + 2 },
+                { url: 'https://afonsoraudinei.github.io/Planejamento/', x: pageWidth/2 + 1, y: brandingBottom + linkHeight + 2 }
             ];
             
             links.forEach(link => {
